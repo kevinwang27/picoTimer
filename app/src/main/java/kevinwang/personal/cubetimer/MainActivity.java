@@ -1,8 +1,7 @@
-package kevinwang.personal.simplecubetimer;
+package kevinwang.personal.cubetimer;
 
 import android.os.Handler;
 import android.os.SystemClock;
-import android.support.v4.view.MotionEventCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.MotionEvent;

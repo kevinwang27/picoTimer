@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:id="@+id/entire_view"
     android:background="@color/darkBlue"
-    tools:context="kevinwang.personal.simplecubetimer.MainActivity">
+    tools:context="kevinwang.personal.cubetimer.MainActivity">
 
     <TextView
         android:id="@+id/timerValue"

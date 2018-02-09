@@ -1,4 +1,4 @@
-package kevinwang.personal.simplecubetimer;
+package kevinwang.personal.cubetimer;
 
 import org.junit.Test;
 

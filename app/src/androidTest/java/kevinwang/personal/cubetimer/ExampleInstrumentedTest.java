@@ -1,4 +1,4 @@
-package kevinwang.personal.simplecubetimer;
+package kevinwang.personal.cubetimer;
 
 import android.content.Context;
 import android.support.test.InstrumentationRegistry;
@@ -21,6 +21,6 @@ public class ExampleInstrumentedTest {
         // Context of the app under test.
         Context appContext = InstrumentationRegistry.getTargetContext();
 
-        assertEquals("kevinwang.personal.simplecubetimer", appContext.getPackageName());
+        assertEquals("kevinwang.personal.cubetimer", appContext.getPackageName());
     }
 }
