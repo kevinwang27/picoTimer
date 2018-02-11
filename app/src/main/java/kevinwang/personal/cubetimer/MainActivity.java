@@ -1,9 +1,13 @@
 package kevinwang.personal.cubetimer;
 
+import android.content.Intent;
 import android.os.Handler;
 import android.os.SystemClock;
+import android.support.annotation.NonNull;
+import android.support.design.widget.BottomNavigationView;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.TextView;
@@ -18,6 +22,7 @@ public class MainActivity extends AppCompatActivity {
     TextView mTextTimer;
     Handler customHandler = new Handler();
     TextView mScrambleText;
+    BottomNavigationView mBottomNavigationView;
     //TextView mScrambleHead;
 
     long startTime = 0L, timeInMilli = 0L, timeSwapBuff = 0L, updateTime = 0L;
@@ -52,6 +57,7 @@ public class MainActivity extends AppCompatActivity {
         mEntireView = findViewById(R.id.entire_view);
         mTextTimer = (TextView) findViewById(R.id.timerValue);
         mScrambleText = (TextView) findViewById(R.id.scramble);
+        mBottomNavigationView = (BottomNavigationView) findViewById(R.id.bottom_navigation);
         //mScrambleHead = (TextView) findViewById(R.id.scramble_header);
 
         if (savedInstanceState == null) {
@@ -76,6 +82,7 @@ public class MainActivity extends AppCompatActivity {
                         // Indicate holding down
                         mEntireView.setBackgroundColor(getResources().getColor(R.color.darkerBlue));
                         mScrambleText.setVisibility(View.INVISIBLE);
+                        mBottomNavigationView.setVisibility(View.INVISIBLE);
                         //mScrambleHead.setVisibility(View.INVISIBLE);
 
                     } else {
@@ -84,8 +91,10 @@ public class MainActivity extends AppCompatActivity {
                         customHandler.removeCallbacks(updateTimerThread);
                         mScrambleText.setText(generateScramble());
                         mScrambleText.setVisibility(View.VISIBLE);
+                        mBottomNavigationView.setVisibility(View.VISIBLE);
                         //mScrambleHead.setVisibility(View.VISIBLE);
                     }
+
                 } else if (action == MotionEvent.ACTION_UP) {
                     if (time_running == false) {
                         // Start the timer

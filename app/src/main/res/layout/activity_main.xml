@@ -48,4 +48,15 @@
         android:textSize="20sp"
         android:lineSpacingExtra="7.5sp"/>
 
+    <android.support.design.widget.BottomNavigationView
+        android:id="@+id/bottom_navigation"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        app:itemBackground="@color/darkerBlue"
+        app:itemIconTint="@drawable/item_color_state"
+        app:itemTextColor="@drawable/item_color_state"
+        app:menu="@menu/bottom_navigation_main"
+        android:visibility="visible" />
+
 </RelativeLayout>
