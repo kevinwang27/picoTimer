@@ -23,10 +23,10 @@ public interface SolveDao {
     public Solve[] loadAllSolves();
 
 /*    @Query("SELECT * FROM solve WHERE solveNum > max(solveNum)-:count")
-    public Solve[] loadRecentSolves(int count);
+    public Solve[] loadRecentSolves(int count);*/
 
-    @Query("SELECT * FROM solve WHERE solve_time = min(solve_time) LIMIT 1")
-    public String loadFastestSolve();*/
+    @Query("SELECT min(solve_time) FROM solve")
+    public String loadFastestSolve();
 
 
 }
