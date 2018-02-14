@@ -29,6 +29,9 @@ public class TimerFragment extends Fragment {
     BottomNavigationView mBottomNavigationView;
     //TextView mScrambleHead;
 
+    private String time;
+    private String scramble;
+
     long startTime = 0L, timeInMilli = 0L, timeSwapBuff = 0L, updateTime = 0L;
     boolean time_running;
 

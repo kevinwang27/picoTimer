@@ -17,6 +17,7 @@ import kevinwang.personal.cubetimer.db.entity.Solve;
  * A simple {@link Fragment} subclass.
  */
 public class TimesFragment extends Fragment {
+
     protected RecyclerView mRecyclerView;
 
     public TimesFragment() {
