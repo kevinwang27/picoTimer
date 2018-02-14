@@ -27,7 +27,7 @@ public class TimesAdapter extends RecyclerView.Adapter<TimesAdapter.ViewHolder> 
             v.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-
+                    
                 }
             });
             textView = (TextView) v.findViewById(R.id.textView);

@@ -18,7 +18,6 @@ import kevinwang.personal.cubetimer.db.entity.Solve;
  */
 public class TimesFragment extends Fragment {
     protected RecyclerView mRecyclerView;
-    protected TimesAdapter mAdapter;
 
     public TimesFragment() {
         // Required empty public constructor

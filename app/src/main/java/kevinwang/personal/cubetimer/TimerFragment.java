@@ -15,6 +15,8 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Random;
 
+import kevinwang.personal.cubetimer.db.entity.Solve;
+
 
 /**
  * A simple {@link Fragment} subclass.
@@ -121,6 +123,19 @@ public class TimerFragment extends Fragment {
         return returnString;
     }
 
+    private void insertSolve() {
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                Solve solve = new Solve();
+                solve.setSolveTime(mTextTimer.getText().toString());
+                solve.setScramble(mScrambleText.getText().toString());
+                App.get().getDatabase().solveDao().insertSolve(solve);
+            }
+        }).start();
+    }
+
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -150,9 +165,14 @@ public class TimerFragment extends Fragment {
                         // Stop the timer
                         timeSwapBuff = 0;
                         customHandler.removeCallbacks(updateTimerThread);
+
+                        insertSolve();
+
                         mScrambleText.setText(generateScramble());
                         mScrambleText.setVisibility(View.VISIBLE);
                         mBottomNavigationView.setVisibility(View.VISIBLE);
+
+
                         //mScrambleHead.setVisibility(View.VISIBLE);
                     }
 
