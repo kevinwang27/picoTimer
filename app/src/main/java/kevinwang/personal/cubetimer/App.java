@@ -24,11 +24,12 @@ public class App extends Application {
     public void onCreate() {
         super.onCreate();
 
-        // create database
         database = Room.databaseBuilder(getApplicationContext(), SolveDatabase.class, DATABASE_NAME).build();
 
         INSTANCE = this;
     }
 
-    public SolveDatabase getDatabase() { return database; }
+    public SolveDatabase getDatabase() {
+        return database;
+    }
 }

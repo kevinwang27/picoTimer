@@ -14,6 +14,7 @@ import android.widget.TextView;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Random;
+import java.util.Timer;
 
 import kevinwang.personal.cubetimer.db.entity.Solve;
 
@@ -23,14 +24,10 @@ import kevinwang.personal.cubetimer.db.entity.Solve;
  */
 public class TimerFragment extends Fragment {
 
-    TextView mTextTimer;
+    public TextView mTextTimer;
     Handler customHandler = new Handler();
-    TextView mScrambleText;
+    public TextView mScrambleText;
     BottomNavigationView mBottomNavigationView;
-    //TextView mScrambleHead;
-
-    private String time;
-    private String scramble;
 
     long startTime = 0L, timeInMilli = 0L, timeSwapBuff = 0L, updateTime = 0L;
     boolean time_running;
@@ -138,7 +135,6 @@ public class TimerFragment extends Fragment {
         }).start();
     }
 
-
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -147,7 +143,6 @@ public class TimerFragment extends Fragment {
         mTextTimer = (TextView) view.findViewById(R.id.timerValue);
         mScrambleText = (TextView) view.findViewById(R.id.scramble);
         mBottomNavigationView = (BottomNavigationView) getActivity().findViewById(R.id.bottom_navigation);
-        //mScrambleHead = (TextView) view.findViewById(R.id.scramble_header);
 
         time_running = false;
 
@@ -162,7 +157,6 @@ public class TimerFragment extends Fragment {
                         mTextTimer.setText(R.string.start_time);
                         mScrambleText.setVisibility(View.INVISIBLE);
                         mBottomNavigationView.setVisibility(View.INVISIBLE);
-                        //mScrambleHead.setVisibility(View.INVISIBLE);
 
                     } else {
                         // Stop the timer
@@ -174,9 +168,6 @@ public class TimerFragment extends Fragment {
                         mScrambleText.setText(generateScramble());
                         mScrambleText.setVisibility(View.VISIBLE);
                         mBottomNavigationView.setVisibility(View.VISIBLE);
-
-
-                        //mScrambleHead.setVisibility(View.VISIBLE);
                     }
 
                 } else if (motionEvent.getAction() == MotionEvent.ACTION_UP) {

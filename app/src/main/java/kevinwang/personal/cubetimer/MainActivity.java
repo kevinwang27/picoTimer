@@ -30,7 +30,7 @@ public class MainActivity extends FragmentActivity {
                             case R.id.action_settings:
                                 settingsFrag = new TimesFragment();
                                 FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
-                                if (!firstFragment.isHidden()){
+                                if (!firstFragment.isHidden()) {
                                     transaction.hide(firstFragment);
                                 }
                                 transaction.add(R.id.entire_view, settingsFrag);
@@ -40,7 +40,7 @@ public class MainActivity extends FragmentActivity {
                             case R.id.action_stats:
                                 timesFrag = new TimesFragment();
                                 FragmentTransaction transaction2 = getSupportFragmentManager().beginTransaction();
-                                if (!firstFragment.isHidden()){
+                                if (!firstFragment.isHidden()) {
                                     transaction2.hide(firstFragment);
                                 }
                                 transaction2.add(R.id.entire_view, timesFrag);
@@ -61,6 +61,7 @@ public class MainActivity extends FragmentActivity {
         if (findViewById(R.id.entire_view) != null) {
 
             if (savedInstanceState != null) {
+                firstFragment = getSupportFragmentManager().getFragment(savedInstanceState, "myFragmentName");
                 return;
             }
 
@@ -69,5 +70,12 @@ public class MainActivity extends FragmentActivity {
             getSupportFragmentManager().beginTransaction()
                     .add(R.id.entire_view, firstFragment).commit();
         }
+    }
+
+    @Override
+    protected void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+
+        getSupportFragmentManager().putFragment(outState, "myFragmentName", firstFragment);
     }
 }

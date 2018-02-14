@@ -42,7 +42,7 @@ public class TimesAdapter extends RecyclerView.Adapter<TimesAdapter.ViewHolder> 
 
                     mDataSet.remove(getAdapterPosition());
                     notifyItemRemoved(getAdapterPosition());
-                    notifyItemRangeChanged(getAdapterPosition(),mDataSet.size());
+                    notifyItemRangeChanged(getAdapterPosition(), mDataSet.size());
                 }
             });
         }

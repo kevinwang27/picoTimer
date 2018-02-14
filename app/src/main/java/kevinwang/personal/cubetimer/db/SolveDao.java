@@ -27,9 +27,6 @@ public interface SolveDao {
     @Query("SELECT * FROM solve")
     public List<Solve> loadAllSolves();
 
-/*    @Query("SELECT * FROM solve WHERE solveNum > max(solveNum)-:count")
-    public Solve[] loadRecentSolves(int count);*/
-
     @Query("SELECT min(solve_time) FROM solve")
     public String loadFastestSolve();
 
