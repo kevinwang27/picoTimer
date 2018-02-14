@@ -1,14 +1,12 @@
 package kevinwang.personal.cubetimer;
 
-import android.os.Handler;
-import android.os.Looper;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import java.util.List;
 
@@ -23,12 +21,12 @@ public class TimesAdapter extends RecyclerView.Adapter<TimesAdapter.ViewHolder> 
 
     public class ViewHolder extends RecyclerView.ViewHolder {
         public TextView textView;
-        public Button delete_button;
+        public ImageButton delete_button;
 
         public ViewHolder(final View v) {
             super(v);
             textView = (TextView) v.findViewById(R.id.textView);
-            delete_button = (Button) v.findViewById(R.id.delete_button);
+            delete_button = (ImageButton) v.findViewById(R.id.delete_button);
 
             delete_button.setOnClickListener(new View.OnClickListener() {
                 @Override
