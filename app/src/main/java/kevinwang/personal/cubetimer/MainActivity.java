@@ -32,6 +32,11 @@ public class MainActivity extends FragmentActivity {
                                 //hide the timer
                                 break;
                             case R.id.action_stats:
+                                TimesFragment timesFrag = new TimesFragment();
+                                FragmentTransaction transaction2 = getSupportFragmentManager().beginTransaction();
+                                transaction2.replace(R.id.entire_view, timesFrag);
+                                transaction2.addToBackStack(null);
+                                transaction2.commit();
                                 break;
                             case R.id.action_timer:
                                 //show the timer

@@ -5,6 +5,8 @@ import android.arch.persistence.room.Delete;
 import android.arch.persistence.room.Insert;
 import android.arch.persistence.room.Query;
 
+import java.util.List;
+
 import kevinwang.personal.cubetimer.db.entity.Solve;
 
 /**
@@ -20,7 +22,7 @@ public interface SolveDao {
     public void deleteSolve(Solve solve);
 
     @Query("SELECT * FROM solve")
-    public Solve[] loadAllSolves();
+    public List<Solve> loadAllSolves();
 
 /*    @Query("SELECT * FROM solve WHERE solveNum > max(solveNum)-:count")
     public Solve[] loadRecentSolves(int count);*/
