@@ -21,8 +21,8 @@ public interface SolveDao {
     @Delete
     public void deleteSolve(Solve solve);
 
-    @Query("DELETE FROM solve WHERE solveID = :id")
-    public void deleteSolveByID(long id);
+    @Query("DELETE FROM solve WHERE solve_time = :time")
+    public void deleteSolveByTime(String time);
 
     @Query("SELECT * FROM solve")
     public List<Solve> loadAllSolves();

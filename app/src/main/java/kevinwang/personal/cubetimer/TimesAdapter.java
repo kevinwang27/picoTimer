@@ -1,11 +1,14 @@
 package kevinwang.personal.cubetimer;
 
+import android.os.Handler;
+import android.os.Looper;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.List;
 
@@ -18,24 +21,32 @@ import kevinwang.personal.cubetimer.db.entity.Solve;
 public class TimesAdapter extends RecyclerView.Adapter<TimesAdapter.ViewHolder> {
     private List<Solve> mDataSet;
 
-    public static class ViewHolder extends RecyclerView.ViewHolder {
-        private final TextView textView;
+    public class ViewHolder extends RecyclerView.ViewHolder {
+        public TextView textView;
+        public Button delete_button;
 
-        public ViewHolder(View v) {
+        public ViewHolder(final View v) {
             super(v);
-            // Define click listener for the ViewHolder's View.
-            v.setOnClickListener(new View.OnClickListener() {
+            textView = (TextView) v.findViewById(R.id.textView);
+            delete_button = (Button) v.findViewById(R.id.delete_button);
+
+            delete_button.setOnClickListener(new View.OnClickListener() {
                 @Override
-                public void onClick(View v) {
-                    
+                public void onClick(View view) {
+                    new Thread(new Runnable() {
+                        @Override
+                        public void run() {
+                            App.get().getDatabase().solveDao().deleteSolveByTime(textView.getText().toString());
+                        }
+                    }).start();
+
+                    mDataSet.remove(getAdapterPosition());
+                    notifyItemRemoved(getAdapterPosition());
+                    notifyItemRangeChanged(getAdapterPosition(),mDataSet.size());
                 }
             });
-            textView = (TextView) v.findViewById(R.id.textView);
         }
 
-        public TextView getTextView() {
-            return textView;
-        }
     }
 
     public TimesAdapter(List<Solve> dataSet) {
@@ -52,7 +63,7 @@ public class TimesAdapter extends RecyclerView.Adapter<TimesAdapter.ViewHolder> 
 
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
-        holder.getTextView().setText(mDataSet.get(position).getSolveTime());
+        holder.textView.setText(mDataSet.get(position).getSolveTime());
     }
 
     @Override
