@@ -5,6 +5,7 @@ import android.os.Handler;
 import android.os.SystemClock;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
@@ -67,6 +68,8 @@ public class TimerFragment extends Fragment {
                 mTextTimer.setText(savedInstanceState.getString("time_text"));
             } else {
                 mBottomNavigationView.setVisibility(View.INVISIBLE);
+                background.setBackgroundColor(getResources().getColor(R.color.darkBlue));
+                mScrambleText.setVisibility(View.INVISIBLE);
                 startTime = savedInstanceState.getLong("start_time");
                 customHandler.postDelayed(updateTimerThread, 0);
                 time_running = true;
