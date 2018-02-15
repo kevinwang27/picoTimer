@@ -21,14 +21,14 @@ public class TimesAdapter extends RecyclerView.Adapter<TimesAdapter.ViewHolder> 
 
     public class ViewHolder extends RecyclerView.ViewHolder {
         public TextView textView;
-        public ImageButton delete_button;
+        public ImageButton arrow;
 
         public ViewHolder(final View v) {
             super(v);
             textView = (TextView) v.findViewById(R.id.textView);
-            delete_button = (ImageButton) v.findViewById(R.id.delete_button);
+            arrow = (ImageButton) v.findViewById(R.id.delete_button);
 
-            delete_button.setOnClickListener(new View.OnClickListener() {
+            arrow.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
                     new Thread(new Runnable() {
