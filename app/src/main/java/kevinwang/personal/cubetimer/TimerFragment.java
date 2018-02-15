@@ -14,7 +14,6 @@ import android.widget.TextView;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Random;
-import java.util.Timer;
 
 import kevinwang.personal.cubetimer.db.entity.Solve;
 
@@ -28,6 +27,7 @@ public class TimerFragment extends Fragment {
     Handler customHandler = new Handler();
     public TextView mScrambleText;
     BottomNavigationView mBottomNavigationView;
+    View background;
 
     long startTime = 0L, timeInMilli = 0L, timeSwapBuff = 0L, updateTime = 0L;
     boolean time_running;
@@ -143,6 +143,7 @@ public class TimerFragment extends Fragment {
         mTextTimer = (TextView) view.findViewById(R.id.timerValue);
         mScrambleText = (TextView) view.findViewById(R.id.scramble);
         mBottomNavigationView = (BottomNavigationView) getActivity().findViewById(R.id.bottom_navigation);
+        background = getActivity().findViewById(R.id.container);
 
         time_running = false;
 
@@ -154,6 +155,7 @@ public class TimerFragment extends Fragment {
                     if (time_running == false) {
                         // Indicate holding down
                         view.setBackgroundColor(getResources().getColor(R.color.darkerBlue));
+                        background.setBackgroundColor(getResources().getColor(R.color.darkerBlue));
                         mTextTimer.setText(R.string.start_time);
                         mScrambleText.setVisibility(View.INVISIBLE);
                         mBottomNavigationView.setVisibility(View.INVISIBLE);
@@ -174,6 +176,7 @@ public class TimerFragment extends Fragment {
                     if (time_running == false) {
                         // Start the timer
                         view.setBackgroundColor(getResources().getColor(R.color.darkBlue));
+                        background.setBackgroundColor(getResources().getColor(R.color.darkBlue));
                         startTime = SystemClock.uptimeMillis();
                         customHandler.postDelayed(updateTimerThread, 0);
                         time_running = true;
