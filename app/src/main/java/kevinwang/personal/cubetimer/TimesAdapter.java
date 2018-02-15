@@ -31,18 +31,22 @@ public class TimesAdapter extends RecyclerView.Adapter<TimesAdapter.ViewHolder> 
             arrow.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    new Thread(new Runnable() {
-                        @Override
-                        public void run() {
-                            App.get().getDatabase().solveDao().deleteSolveByTime(textView.getText().toString());
-                        }
-                    }).start();
-
-                    mDataSet.remove(getAdapterPosition());
-                    notifyItemRemoved(getAdapterPosition());
-                    notifyItemRangeChanged(getAdapterPosition(), mDataSet.size());
+                    removeSolve();
                 }
             });
+        }
+
+        private void removeSolve() {
+            new Thread(new Runnable() {
+                @Override
+                public void run() {
+                    App.get().getDatabase().solveDao().deleteSolveByTime(textView.getText().toString());
+                }
+            }).start();
+
+            mDataSet.remove(getAdapterPosition());
+            notifyItemRemoved(getAdapterPosition());
+            notifyItemRangeChanged(getAdapterPosition(), mDataSet.size());
         }
 
     }

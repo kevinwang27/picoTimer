@@ -3,22 +3,29 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <item
-        android:id="@+id/action_stats"
-        android:enabled="true"
-        android:icon="@drawable/ic_stats"
-        android:title="Stats"
-        app:showAsAction="always" />
-    <item
         android:id="@+id/action_timer"
         android:enabled="true"
         android:icon="@drawable/ic_timer"
         android:title="Timer"
-        app:showAsAction="always"/>
+        app:showAsAction="ifRoom"/>
+    <item
+        android:id="@+id/action_solves"
+        android:enabled="true"
+        android:icon="@drawable/ic_timer"
+        android:title="Solves"
+        app:showAsAction="ifRoom"/>
+    <item
+        android:id="@+id/action_stats"
+        android:enabled="true"
+        android:icon="@drawable/ic_stats"
+        android:title="Stats"
+        app:showAsAction="ifRoom" />
+
     <item
         android:id="@+id/action_settings"
         android:enabled="true"
         android:icon="@drawable/ic_settings"
         android:title="Settings"
-        app:showAsAction="always" />
+        app:showAsAction="ifRoom" />
 
 </menu>

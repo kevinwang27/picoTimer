@@ -26,6 +26,8 @@ public class MainActivity extends AppCompatActivity {
         toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
+        BottomNavigationViewHelper.disableShiftMode(mBottomNavigationView);
+
         mBottomNavigationView.setOnNavigationItemSelectedListener(
                 new BottomNavigationView.OnNavigationItemSelectedListener() {
                     @Override
@@ -41,9 +43,9 @@ public class MainActivity extends AppCompatActivity {
                                 transaction.addToBackStack(null);
                                 transaction.commit();
                                 getSupportActionBar().show();
-                                getSupportActionBar().setTitle("Times");
+                                getSupportActionBar().setTitle("Solves");
                                 break;
-                            case R.id.action_stats:
+                            case R.id.action_solves:
                                 timesFrag = new TimesFragment();
                                 FragmentTransaction transaction2 = getSupportFragmentManager().beginTransaction();
                                 if (!firstFragment.isHidden()) {
@@ -53,7 +55,7 @@ public class MainActivity extends AppCompatActivity {
                                 transaction2.addToBackStack(null);
                                 transaction2.commit();
                                 getSupportActionBar().show();
-                                getSupportActionBar().setTitle("Times");
+                                getSupportActionBar().setTitle("Solves");
                                 break;
                             case R.id.action_timer:
                                 FragmentTransaction transaction3 = getSupportFragmentManager().beginTransaction();
