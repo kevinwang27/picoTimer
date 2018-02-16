@@ -109,16 +109,22 @@ public class StatsFragment extends Fragment {
         return result/list.size();
     }
 
+    // need to make it eliminate fastest and slowest times
     private long calcAoN(int n, List<Long> list) {
-        Collections.reverse(list);
+        List<Long> copy = new ArrayList<>(list);
+        Collections.reverse(copy);
         long result = 0;
         int count = 0;
-        for (long num : list) {
+        //List<Long> nums = new ArrayList<>();
+        for (long num : copy) {
             if (count < n) {
                 result += num;
                 count++;
+                //nums.add(num);
             }
         }
+        //nums.add(result/count);
+        //Collections.reverse(nums); // average is at the front of arraylist, rest of list is times used to calc
         return result/count;
     }
 
