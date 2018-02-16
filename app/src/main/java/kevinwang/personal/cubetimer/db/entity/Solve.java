@@ -11,7 +11,7 @@ import android.arch.persistence.room.PrimaryKey;
 @Entity
 public class Solve {
     @PrimaryKey(autoGenerate = true)
-    private int solveID;
+    private int solve_num;
 
     @ColumnInfo(name = "solve_time")
     private String solveTime;
@@ -20,12 +20,12 @@ public class Solve {
 
     private String scramble;
 
-    public int getSolveID() {
-        return solveID;
+    public int getSolve_num() {
+        return solve_num;
     }
 
-    public void setSolveID(int solveID) {
-        this.solveID = solveID;
+    public void setSolve_num(int solve_num) {
+        this.solve_num = solve_num;
     }
 
     public String getSolveTime() {

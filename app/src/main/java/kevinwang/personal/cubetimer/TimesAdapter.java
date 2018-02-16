@@ -28,7 +28,7 @@ public class TimesAdapter extends RecyclerView.Adapter<TimesAdapter.ViewHolder> 
         public TextView timeTextView;
         public TextView scrambleTextView;
         public TextView oldTimeTextView;
-        public ImageButton arrow;;
+        public ImageButton arrow;
 
         public ViewHolder(final View v) {
             super(v);

@@ -35,9 +35,4 @@ public interface SolveDao {
 
     @Query("SELECT * FROM solve")
     public List<Solve> loadAllSolves();
-
-    @Query("SELECT min(solve_time) FROM solve")
-    public String loadFastestSolve();
-
-
 }

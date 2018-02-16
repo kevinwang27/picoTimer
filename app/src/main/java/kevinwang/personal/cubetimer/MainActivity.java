@@ -15,6 +15,7 @@ public class MainActivity extends AppCompatActivity {
     Fragment firstFragment;
     Fragment timesFrag;
     Fragment settingsFrag;
+    Fragment statsFrag;
     Toolbar toolbar;
 
     @Override
@@ -56,6 +57,18 @@ public class MainActivity extends AppCompatActivity {
                                 transaction2.commit();
                                 getSupportActionBar().show();
                                 getSupportActionBar().setTitle("Solves");
+                                break;
+                            case R.id.action_stats:
+                                statsFrag = new StatsFragment();
+                                FragmentTransaction transaction4 = getSupportFragmentManager().beginTransaction();
+                                if (!firstFragment.isHidden()) {
+                                    transaction4.hide(firstFragment);
+                                }
+                                transaction4.add(R.id.entire_view, statsFrag);
+                                transaction4.addToBackStack(null);
+                                transaction4.commit();
+                                getSupportActionBar().show();
+                                getSupportActionBar().setTitle("Stats");
                                 break;
                             case R.id.action_timer:
                                 FragmentTransaction transaction3 = getSupportFragmentManager().beginTransaction();
