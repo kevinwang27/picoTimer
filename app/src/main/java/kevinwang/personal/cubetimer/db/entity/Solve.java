@@ -16,8 +16,9 @@ public class Solve {
     @ColumnInfo(name = "solve_time")
     private String solveTime;
 
-    private String scramble;
+    private String oldTime;
 
+    private String scramble;
 
     public int getSolveID() {
         return solveID;
@@ -41,5 +42,13 @@ public class Solve {
 
     public void setScramble(String scramble) {
         this.scramble = scramble;
+    }
+
+    public String getOldTime() {
+        return oldTime;
+    }
+
+    public void setOldTime(String oldTime) {
+        this.oldTime = oldTime;
     }
 }

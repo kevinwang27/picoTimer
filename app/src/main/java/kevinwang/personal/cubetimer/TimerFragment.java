@@ -133,6 +133,7 @@ public class TimerFragment extends Fragment {
                 Solve solve = new Solve();
                 solve.setSolveTime(mTextTimer.getText().toString());
                 solve.setScramble(mScrambleText.getText().toString());
+                solve.setOldTime(mTextTimer.getText().toString());
                 App.get().getDatabase().solveDao().insertSolve(solve);
             }
         }).start();
