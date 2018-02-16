@@ -1,12 +1,10 @@
 package kevinwang.personal.cubetimer;
 
-import android.app.Activity;
-import android.app.Dialog;
 import android.content.Context;
-import android.content.DialogInterface;
+import android.graphics.Color;
 import android.support.v7.app.AlertDialog;
+import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -26,6 +24,7 @@ public class TimesAdapter extends RecyclerView.Adapter<TimesAdapter.ViewHolder> 
     private List<Solve> mDataSet;
 
     public class ViewHolder extends RecyclerView.ViewHolder {
+        public CardView cv;
         public TextView timeTextView;
         public TextView scrambleTextView;
         public TextView oldTimeTextView;
@@ -33,6 +32,7 @@ public class TimesAdapter extends RecyclerView.Adapter<TimesAdapter.ViewHolder> 
 
         public ViewHolder(final View v) {
             super(v);
+            cv = (CardView) v.findViewById(R.id.card_item);
             timeTextView = (TextView) v.findViewById(R.id.time_text);
             scrambleTextView = (TextView) v.findViewById(R.id.scramble_text);
             oldTimeTextView = (TextView) v.findViewById(R.id.old_time);
@@ -162,6 +162,11 @@ public class TimesAdapter extends RecyclerView.Adapter<TimesAdapter.ViewHolder> 
         holder.timeTextView.setText(mDataSet.get(position).getSolveTime());
         holder.scrambleTextView.setText(mDataSet.get(position).getScramble());
         holder.oldTimeTextView.setText(mDataSet.get(position).getOldTime());
+        if (position % 2 == 0) {
+            holder.cv.setCardBackgroundColor(Color.LTGRAY);
+        } else {
+            holder.cv.setCardBackgroundColor(Color.WHITE);
+        }
     }
 
     @Override
