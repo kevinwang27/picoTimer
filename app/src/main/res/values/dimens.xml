@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <dimen name="time_margin_top">180dp</dimen>
-    <dimen name="time_size">100sp</dimen>
+    <dimen name="time_size">110sp</dimen>
     <dimen name="text_margin">16dp</dimen>
 </resources>

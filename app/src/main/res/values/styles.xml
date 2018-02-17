@@ -12,6 +12,7 @@
 
     <style name="AppTheme.SettingsTheme" parent="AppTheme">
         <item name="preferenceTheme">@style/PreferenceThemeOverlay.v14.Material</item>
+        <item name="android:windowBackground">@color/white</item>
     </style>
 
 </resources>

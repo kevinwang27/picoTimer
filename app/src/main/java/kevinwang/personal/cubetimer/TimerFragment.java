@@ -1,10 +1,12 @@
 package kevinwang.personal.cubetimer;
 
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.SystemClock;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v4.app.Fragment;
+import android.support.v7.preference.PreferenceManager;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
@@ -28,6 +30,7 @@ public class TimerFragment extends Fragment {
     public TextView mScrambleText;
     BottomNavigationView mBottomNavigationView;
     View background;
+    SharedPreferences sharedPref;
 
     long startTime = 0L, timeInMilli = 0L, timeSwapBuff = 0L, updateTime = 0L;
     boolean time_running;
@@ -59,7 +62,11 @@ public class TimerFragment extends Fragment {
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        
+
+        sharedPref = PreferenceManager.getDefaultSharedPreferences(getContext());
+        /* default timer values */
+        mTextTimer.setTextSize(sharedPref.getInt("timer_size", 5)* 10 + 60);
+
         if (savedInstanceState == null) {
             mScrambleText.setText(generateScramble());
         } else {

@@ -18,8 +18,10 @@ import android.widget.TextView;
 
 public class MainActivity extends AppCompatActivity {
 
+    View background;
     BottomNavigationView mBottomNavigationView;
-    Fragment firstFragment;
+    Fragment currentFragment;
+    Fragment timerFrag;
     Fragment timesFrag;
     Fragment settingsFrag;
     Fragment statsFrag;
@@ -31,6 +33,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        background = findViewById(R.id.container);
         mBottomNavigationView = (BottomNavigationView) findViewById(R.id.bottom_navigation);
         toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -51,11 +54,13 @@ public class MainActivity extends AppCompatActivity {
                             case R.id.action_settings:
                                 settingsFrag = new SettingsFragment();
                                 FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
-                                if (!firstFragment.isHidden()) {
-                                    transaction.hide(firstFragment);
+                                if (!timerFrag.isHidden()) {
+                                    transaction.hide(timerFrag);
+                                } else {
+                                    transaction.remove(getSupportFragmentManager().findFragmentById(R.id.entire_view));
                                 }
-                                transaction.replace(R.id.entire_view, settingsFrag, "settings").commit();
-
+                                transaction.add(R.id.entire_view, settingsFrag).commit();
+                                
                                 getSupportActionBar().setDisplayShowCustomEnabled(false);
                                 custom_enabled = false;
                                 getSupportActionBar().setTitle("Settings");
@@ -64,10 +69,10 @@ public class MainActivity extends AppCompatActivity {
                             case R.id.action_solves:
                                 timesFrag = new TimesFragment();
                                 final FragmentTransaction transaction2 = getSupportFragmentManager().beginTransaction();
-                                if (!firstFragment.isHidden()) {
-                                    transaction2.hide(firstFragment);
+                                if (!timerFrag.isHidden()) {
+                                    transaction2.hide(timerFrag);
                                 }
-                                transaction2.replace(R.id.entire_view, timesFrag, "solves").commit();
+                                transaction2.add(R.id.entire_view, timesFrag).commit();
                                 mTitleTextView.setText(R.string.action_solves_title);
                                 imageButton.setOnClickListener(new View.OnClickListener() {
                                     @Override
@@ -84,10 +89,10 @@ public class MainActivity extends AppCompatActivity {
                             case R.id.action_stats:
                                 statsFrag = new StatsFragment();
                                 FragmentTransaction transaction4 = getSupportFragmentManager().beginTransaction();
-                                if (!firstFragment.isHidden()) {
-                                    transaction4.hide(firstFragment);
+                                if (!timerFrag.isHidden()) {
+                                    transaction4.hide(timerFrag);
                                 }
-                                transaction4.replace(R.id.entire_view, statsFrag, "stats").commit();
+                                transaction4.add(R.id.entire_view, statsFrag).commit();
 
                                 getSupportActionBar().setDisplayShowCustomEnabled(false);
                                 custom_enabled = false;
@@ -95,7 +100,7 @@ public class MainActivity extends AppCompatActivity {
                                 getSupportActionBar().show();
                                 break;
                             case R.id.action_timer:
-                                getSupportFragmentManager().beginTransaction().replace(R.id.entire_view, firstFragment, "timer").show(firstFragment).commit();
+                                getSupportFragmentManager().beginTransaction().replace(R.id.entire_view, timerFrag).show(timerFrag).commit();
 
                                 getSupportActionBar().hide();
                                 break;
@@ -107,7 +112,7 @@ public class MainActivity extends AppCompatActivity {
         if (findViewById(R.id.entire_view) != null) {
 
             if (savedInstanceState != null) {
-                firstFragment = getSupportFragmentManager().getFragment(savedInstanceState, "myFragmentName");
+                timerFrag = getSupportFragmentManager().getFragment(savedInstanceState, "myFragmentName");
                 boolean custom_visible = savedInstanceState.getBoolean("custom_visible");
                 if (savedInstanceState.getBoolean("action_bar_visible")) {
                     getSupportActionBar().show();
@@ -120,7 +125,7 @@ public class MainActivity extends AppCompatActivity {
                         imageButton.setOnClickListener(new View.OnClickListener() {
                             @Override
                             public void onClick(View view) {
-                                createAlertAndDelete(firstFragment.getActivity());
+                                createAlertAndDelete(timerFrag.getActivity());
                             }
                         });
                         getSupportActionBar().setDisplayShowCustomEnabled(true);
@@ -131,10 +136,11 @@ public class MainActivity extends AppCompatActivity {
                 return;
             }
 
-            firstFragment = new TimerFragment();
+            timerFrag = new TimerFragment();
+            currentFragment = timerFrag;
 
             getSupportFragmentManager().beginTransaction()
-                    .add(R.id.entire_view, firstFragment).commit();
+                    .add(R.id.entire_view, timerFrag).commit();
 
             getSupportActionBar().hide();
         }
@@ -144,7 +150,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
 
-        getSupportFragmentManager().putFragment(outState, "myFragmentName", firstFragment);
+        getSupportFragmentManager().putFragment(outState, "myFragmentName", timerFrag);
         outState.putBoolean("action_bar_visible", getSupportActionBar().isShowing());
         outState.putBoolean("custom_visible", custom_enabled);
         outState.putCharSequence("action_bar_title", getSupportActionBar().getTitle());
