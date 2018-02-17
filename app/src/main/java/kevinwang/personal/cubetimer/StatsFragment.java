@@ -8,7 +8,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -72,8 +71,8 @@ public class StatsFragment extends Fragment {
     private long stringToLong(String input) {
         int minutes, seconds, milli;
         String[] arr = input.replaceAll("\\s", "").split(":");
-        if (arr[arr.length-1].contains("(+2)")) {
-            arr[arr.length-1] = arr[arr.length-1].replace("(+2)", "");
+        if (arr[arr.length - 1].contains("(+2)")) {
+            arr[arr.length - 1] = arr[arr.length - 1].replace("(+2)", "");
         }
         if (arr.length == 2) {
             milli = Integer.parseInt(arr[1]);
@@ -84,12 +83,12 @@ public class StatsFragment extends Fragment {
             seconds = Integer.parseInt(arr[1]);
             minutes = Integer.parseInt(arr[0]);
         }
-        return minutes*6000 + 100 * seconds + milli;
+        return minutes * 6000 + 100 * seconds + milli;
     }
 
     private String longToString(long input) {
-        int milli = (int) input%100;
-        int total_seconds = (int) (input/100);
+        int milli = (int) input % 100;
+        int total_seconds = (int) (input / 100);
         int seconds = total_seconds % 60;
         int minutes = (total_seconds / 60) % 60;
         if (minutes > 0) {
@@ -105,7 +104,7 @@ public class StatsFragment extends Fragment {
         for (long num : list) {
             result += num;
         }
-        return result/list.size();
+        return result / list.size();
     }
 
     private long calcAoN(int n, List<Long> list) {
@@ -126,7 +125,7 @@ public class StatsFragment extends Fragment {
         }
         total -= Collections.min(nums);
         total -= Collections.max(nums);
-        return total/(count-2);
+        return total / (count - 2);
     }
 
     private long getBestAoN(int n, List<Long> list) {
@@ -147,9 +146,10 @@ public class StatsFragment extends Fragment {
 
     private List<Long> removeLastAndReturn(List<Long> list) {
         List<Long> copy = new ArrayList<>(list);
-        copy.remove(copy.size()-1);
+        copy.remove(copy.size() - 1);
         return copy;
     }
+
     private void initTimes(List<Solve> solves, List<Long> solveTimes) {
         mTimes[0] = String.valueOf(solves.size());
         if (solveTimes.size() > 0) {
@@ -158,24 +158,25 @@ public class StatsFragment extends Fragment {
             if (solveTimes.size() == 1) {
                 mTimes[3] = longToString(solveTimes.get(0));
             } else if (solveTimes.size() == 2) {
-                mTimes[3] = longToString((solveTimes.get(0)+solveTimes.get(1))/2);
+                mTimes[3] = longToString((solveTimes.get(0) + solveTimes.get(1)) / 2);
             } else {
                 mTimes[3] = longToString(calcAoN(solveTimes.size(), solveTimes));
             }
             mTimes[4] = longToString(calcMean(solveTimes));
             if (solveTimes.size() < 5) {
-                mTimes[5] = "";
-                mTimes[6] = "";
+                mTimes[5] = " - ";
+                mTimes[6] = " - ";
             } else {
                 mTimes[5] = longToString(calcAoN(5, solveTimes));
                 mTimes[6] = longToString(getBestAoN(5, solveTimes));
             }
             if (solveTimes.size() < 12) {
-                mTimes[7] = "";
-                mTimes[8] = "";
+                mTimes[7] = " - ";
+                mTimes[8] = " - ";
             } else {
                 mTimes[7] = longToString(calcAoN(12, solveTimes));
-                mTimes[8] = longToString(getBestAoN(12, solveTimes));;
+                mTimes[8] = longToString(getBestAoN(12, solveTimes));
+                ;
             }
         }
     }

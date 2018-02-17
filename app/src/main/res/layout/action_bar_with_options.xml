@@ -8,10 +8,8 @@
         android:id="@+id/title_text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_centerVertical="true"
-        android:textColor="@color/black"
-        android:textStyle="bold"
-        android:textSize="18sp" />
+        style="@style/TextAppearance.AppCompat.Widget.ActionBar.Title"
+        android:layout_centerVertical="true" />
 
     <ImageButton
         android:id="@+id/imageButton"

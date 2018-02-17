@@ -32,6 +32,7 @@ public class TimesAdapter extends RecyclerView.Adapter<TimesAdapter.ViewHolder> 
 
         public ViewHolder(final View v) {
             super(v);
+
             cv = (CardView) v.findViewById(R.id.card_item);
             timeTextView = (TextView) v.findViewById(R.id.time_text);
             scrambleTextView = (TextView) v.findViewById(R.id.scramble_text);

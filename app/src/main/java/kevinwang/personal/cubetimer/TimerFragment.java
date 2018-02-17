@@ -5,7 +5,6 @@ import android.os.Handler;
 import android.os.SystemClock;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v4.app.Fragment;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;

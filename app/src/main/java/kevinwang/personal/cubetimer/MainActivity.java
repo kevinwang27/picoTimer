@@ -2,10 +2,10 @@ package kevinwang.personal.cubetimer;
 
 import android.content.Context;
 import android.content.DialogInterface;
+import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v4.app.Fragment;
-import android.support.annotation.NonNull;
-import android.os.Bundle;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
@@ -24,7 +24,7 @@ public class MainActivity extends AppCompatActivity {
     Fragment settingsFrag;
     Fragment statsFrag;
     Toolbar toolbar;
-    boolean custom_enabled;
+    boolean custom_enabled; // whether custom view for toolbar is enabled
 
     @Override
     protected void onCreate(final Bundle savedInstanceState) {
@@ -35,12 +35,13 @@ public class MainActivity extends AppCompatActivity {
         toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
+        /* setup toolbar */
         LayoutInflater layoutInflater = LayoutInflater.from(this);
         final View view = layoutInflater.inflate(R.layout.action_bar_with_options, null);
         final TextView mTitleTextView = (TextView) view.findViewById(R.id.title_text);
         final ImageButton imageButton = (ImageButton) view.findViewById(R.id.imageButton);
 
-        BottomNavigationViewHelper.disableShiftMode(mBottomNavigationView);
+        BottomNavigationViewHelper.disableShiftMode(mBottomNavigationView); // display four titles
 
         mBottomNavigationView.setOnNavigationItemSelectedListener(
                 new BottomNavigationView.OnNavigationItemSelectedListener() {
@@ -53,11 +54,11 @@ public class MainActivity extends AppCompatActivity {
                                 if (!firstFragment.isHidden()) {
                                     transaction.hide(firstFragment);
                                 }
-                                transaction.add(R.id.entire_view, settingsFrag);
-                                transaction.addToBackStack(null);
-                                transaction.commit();
-                                getSupportActionBar().show();
+                                transaction.add(R.id.entire_view, settingsFrag).addToBackStack(null).commit();
+                                getSupportActionBar().setDisplayShowCustomEnabled(false);
+                                custom_enabled = false;
                                 getSupportActionBar().setTitle("Solves");
+                                getSupportActionBar().show();
                                 break;
                             case R.id.action_solves:
                                 timesFrag = new TimesFragment();
@@ -68,42 +69,32 @@ public class MainActivity extends AppCompatActivity {
                                 transaction2.add(R.id.entire_view, timesFrag);
                                 transaction2.addToBackStack(null);
                                 transaction2.commit();
-
-                                mTitleTextView.setText("Solves");
+                                mTitleTextView.setText(R.string.action_solves_title);
                                 imageButton.setOnClickListener(new View.OnClickListener() {
-
                                     @Override
                                     public void onClick(View view) {
                                         createAlertAndDelete(timesFrag.getActivity());
                                     }
                                 });
-
                                 getSupportActionBar().setCustomView(view);
                                 getSupportActionBar().setDisplayShowCustomEnabled(true);
                                 custom_enabled = true;
                                 getSupportActionBar().show();
                                 break;
-
                             case R.id.action_stats:
                                 statsFrag = new StatsFragment();
                                 FragmentTransaction transaction4 = getSupportFragmentManager().beginTransaction();
                                 if (!firstFragment.isHidden()) {
                                     transaction4.hide(firstFragment);
                                 }
-                                transaction4.add(R.id.entire_view, statsFrag);
-                                transaction4.addToBackStack(null);
-                                transaction4.commit();
-
+                                transaction4.add(R.id.entire_view, statsFrag).addToBackStack(null).commit();
                                 getSupportActionBar().setDisplayShowCustomEnabled(false);
                                 custom_enabled = false;
                                 getSupportActionBar().setTitle("Stats");
                                 getSupportActionBar().show();
                                 break;
                             case R.id.action_timer:
-                                FragmentTransaction transaction3 = getSupportFragmentManager().beginTransaction();
-                                transaction3.replace(R.id.entire_view, firstFragment);
-                                transaction3.show(firstFragment);
-                                transaction3.commit();
+                                getSupportFragmentManager().beginTransaction().replace(R.id.entire_view, firstFragment).show(firstFragment).commit();
                                 getSupportActionBar().hide();
                                 break;
                         }
@@ -116,21 +107,22 @@ public class MainActivity extends AppCompatActivity {
             if (savedInstanceState != null) {
                 firstFragment = getSupportFragmentManager().getFragment(savedInstanceState, "myFragmentName");
                 boolean custom_visible = savedInstanceState.getBoolean("custom_visible");
-                if (savedInstanceState.getBoolean("action_bar_visible") && !custom_visible) {
+                if (savedInstanceState.getBoolean("action_bar_visible")) {
                     getSupportActionBar().show();
-                    getSupportActionBar().setTitle(savedInstanceState.getString("action_bar_title"));
-                } else if (savedInstanceState.getBoolean("action_bar_visible") && custom_visible){
-                    getSupportActionBar().show();
-                    getSupportActionBar().setCustomView(view);
-                    custom_enabled = true;
-                    mTitleTextView.setText("Solves");
-                    imageButton.setOnClickListener(new View.OnClickListener() {
-                        @Override
-                        public void onClick(View view) {
-                            createAlertAndDelete(firstFragment.getActivity());
-                        }
-                    });
-                    getSupportActionBar().setDisplayShowCustomEnabled(true);
+                    if (!custom_visible) {
+                        getSupportActionBar().setTitle(savedInstanceState.getString("action_bar_title"));
+                    } else {
+                        getSupportActionBar().setCustomView(view);
+                        custom_enabled = true;
+                        mTitleTextView.setText(R.string.action_solves_title);
+                        imageButton.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View view) {
+                                createAlertAndDelete(firstFragment.getActivity());
+                            }
+                        });
+                        getSupportActionBar().setDisplayShowCustomEnabled(true);
+                    }
                 } else {
                     getSupportActionBar().hide();
                 }
