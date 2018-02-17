@@ -135,7 +135,7 @@ public class TimesAdapter extends RecyclerView.Adapter<TimesAdapter.ViewHolder> 
             new Thread(new Runnable() {
                 @Override
                 public void run() {
-                    App.get().getDatabase().solveDao().deleteSolveByTime(timeTextView.getText().toString());
+                    App.get().getDatabase().solveDao().deleteSolveByScramble(scrambleTextView.getText().toString());
                 }
             }).start();
 

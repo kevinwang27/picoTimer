@@ -21,6 +21,9 @@ public interface SolveDao {
     @Delete
     public void deleteSolve(Solve solve);
 
+    @Query("DELETE FROM solve")
+    public void clearSolves();
+
     @Query("UPDATE solve SET solve_time = :time WHERE scramble = :scramble")
     public void setSolveTimeByScramble(String scramble, String time);
 
@@ -30,8 +33,8 @@ public interface SolveDao {
     @Query("SELECT * FROM solve WHERE scramble = :scramble LIMIT 1")
     public Solve getSolveByScramble(String scramble);
 
-    @Query("DELETE FROM solve WHERE solve_time = :time")
-    public void deleteSolveByTime(String time);
+    @Query("DELETE FROM solve WHERE scramble = :scramble")
+    public void deleteSolveByScramble(String scramble);
 
     @Query("SELECT * FROM solve")
     public List<Solve> loadAllSolves();

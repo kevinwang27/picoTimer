@@ -8,6 +8,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -21,11 +22,9 @@ import kevinwang.personal.cubetimer.db.entity.Solve;
 public class StatsFragment extends Fragment {
 
     private String[] mDescriptions = {"Number of solves:", "Best time:", "Worst Time:", "Session Average:", "Session Mean:", "Current Average of 5:",
-            "Best Average of 5:", "Current Average of 12:", "Best Average of 12"};
+            "Best Average of 5:", "Current Average of 12:", "Best Average of 12:"};
     private String[] mTimes = new String[mDescriptions.length];
     private List<Long> solveTimes = new ArrayList<>();
-    private List<Long> aofs = new ArrayList<>();
-    private List<Long> aots = new ArrayList<>();
     protected RecyclerView mRecyclerView;
 
     public StatsFragment() {
@@ -109,34 +108,75 @@ public class StatsFragment extends Fragment {
         return result/list.size();
     }
 
-    // need to make it eliminate fastest and slowest times
     private long calcAoN(int n, List<Long> list) {
+        if (list.size() < n) {
+            return -1;
+        }
         List<Long> copy = new ArrayList<>(list);
         Collections.reverse(copy);
-        long result = 0;
         int count = 0;
-        //List<Long> nums = new ArrayList<>();
+        long total = 0;
+        List<Long> nums = new ArrayList<>();
         for (long num : copy) {
             if (count < n) {
-                result += num;
+                total += num;
+                nums.add(num);
                 count++;
-                //nums.add(num);
             }
         }
-        //nums.add(result/count);
-        //Collections.reverse(nums); // average is at the front of arraylist, rest of list is times used to calc
-        return result/count;
+        total -= Collections.min(nums);
+        total -= Collections.max(nums);
+        return total/(count-2);
     }
 
+    private long getBestAoN(int n, List<Long> list) {
+        if (list.size() < n) {
+            return -1;
+        } else if (list.size() == n) {
+            return calcAoN(n, list);
+        } else {
+            long currAoF = calcAoN(n, list);
+            long restBestAof = getBestAoN(n, removeLastAndReturn(list));
+            if (currAoF < restBestAof) {
+                return currAoF;
+            } else {
+                return restBestAof;
+            }
+        }
+    }
+
+    private List<Long> removeLastAndReturn(List<Long> list) {
+        List<Long> copy = new ArrayList<>(list);
+        copy.remove(copy.size()-1);
+        return copy;
+    }
     private void initTimes(List<Solve> solves, List<Long> solveTimes) {
         mTimes[0] = String.valueOf(solves.size());
-        mTimes[1] = longToString(Collections.min(solveTimes));
-        mTimes[2] = longToString(Collections.max(solveTimes));
-        mTimes[3] = "0:00";
-        mTimes[4] = longToString(calcMean(solveTimes));
-        mTimes[5] = longToString(calcAoN(5, solveTimes));
-        mTimes[6] = "0:00";
-        mTimes[7] = longToString(calcAoN(12, solveTimes));
-        mTimes[8] = "0:00";
+        if (solveTimes.size() > 0) {
+            mTimes[1] = longToString(Collections.min(solveTimes));
+            mTimes[2] = longToString(Collections.max(solveTimes));
+            if (solveTimes.size() == 1) {
+                mTimes[3] = longToString(solveTimes.get(0));
+            } else if (solveTimes.size() == 2) {
+                mTimes[3] = longToString((solveTimes.get(0)+solveTimes.get(1))/2);
+            } else {
+                mTimes[3] = longToString(calcAoN(solveTimes.size(), solveTimes));
+            }
+            mTimes[4] = longToString(calcMean(solveTimes));
+            if (solveTimes.size() < 5) {
+                mTimes[5] = "";
+                mTimes[6] = "";
+            } else {
+                mTimes[5] = longToString(calcAoN(5, solveTimes));
+                mTimes[6] = longToString(getBestAoN(5, solveTimes));
+            }
+            if (solveTimes.size() < 12) {
+                mTimes[7] = "";
+                mTimes[8] = "";
+            } else {
+                mTimes[7] = longToString(calcAoN(12, solveTimes));
+                mTimes[8] = longToString(getBestAoN(12, solveTimes));;
+            }
+        }
     }
 }
