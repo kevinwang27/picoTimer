@@ -59,8 +59,7 @@ public class TimerFragment extends Fragment {
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-
-
+        
         if (savedInstanceState == null) {
             mScrambleText.setText(generateScramble());
         } else {

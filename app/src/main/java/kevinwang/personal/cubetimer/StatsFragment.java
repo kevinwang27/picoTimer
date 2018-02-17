@@ -21,7 +21,7 @@ import kevinwang.personal.cubetimer.db.entity.Solve;
 public class StatsFragment extends Fragment {
 
     private String[] mDescriptions = {"Number of solves:", "Best time:", "Worst Time:", "Session Average:", "Session Mean:", "Current Average of 5:",
-            "Best Average of 5:", "Current Average of 12:", "Best Average of 12:"};
+            "Best Average of 5:", "Current Average of 12:", "Best Average of 12:", "Current Average of 100:"};
     private String[] mTimes = new String[mDescriptions.length];
     private List<Long> solveTimes = new ArrayList<>();
     protected RecyclerView mRecyclerView;
@@ -176,7 +176,11 @@ public class StatsFragment extends Fragment {
             } else {
                 mTimes[7] = longToString(calcAoN(12, solveTimes));
                 mTimes[8] = longToString(getBestAoN(12, solveTimes));
-                ;
+            }
+            if (solveTimes.size() < 100) {
+                mTimes[9] = " - ";
+            } else {
+                mTimes[9] = longToString(calcAoN(100, solveTimes));
             }
         }
     }

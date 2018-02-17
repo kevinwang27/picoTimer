@@ -49,15 +49,16 @@ public class MainActivity extends AppCompatActivity {
                     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
                         switch (item.getItemId()) {
                             case R.id.action_settings:
-                                settingsFrag = new TimesFragment();
+                                settingsFrag = new SettingsFragment();
                                 FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
                                 if (!firstFragment.isHidden()) {
                                     transaction.hide(firstFragment);
                                 }
-                                transaction.add(R.id.entire_view, settingsFrag).addToBackStack(null).commit();
+                                transaction.replace(R.id.entire_view, settingsFrag, "settings").commit();
+
                                 getSupportActionBar().setDisplayShowCustomEnabled(false);
                                 custom_enabled = false;
-                                getSupportActionBar().setTitle("Solves");
+                                getSupportActionBar().setTitle("Settings");
                                 getSupportActionBar().show();
                                 break;
                             case R.id.action_solves:
@@ -66,9 +67,7 @@ public class MainActivity extends AppCompatActivity {
                                 if (!firstFragment.isHidden()) {
                                     transaction2.hide(firstFragment);
                                 }
-                                transaction2.add(R.id.entire_view, timesFrag);
-                                transaction2.addToBackStack(null);
-                                transaction2.commit();
+                                transaction2.replace(R.id.entire_view, timesFrag, "solves").commit();
                                 mTitleTextView.setText(R.string.action_solves_title);
                                 imageButton.setOnClickListener(new View.OnClickListener() {
                                     @Override
@@ -76,6 +75,7 @@ public class MainActivity extends AppCompatActivity {
                                         createAlertAndDelete(timesFrag.getActivity());
                                     }
                                 });
+
                                 getSupportActionBar().setCustomView(view);
                                 getSupportActionBar().setDisplayShowCustomEnabled(true);
                                 custom_enabled = true;
@@ -87,14 +87,16 @@ public class MainActivity extends AppCompatActivity {
                                 if (!firstFragment.isHidden()) {
                                     transaction4.hide(firstFragment);
                                 }
-                                transaction4.add(R.id.entire_view, statsFrag).addToBackStack(null).commit();
+                                transaction4.replace(R.id.entire_view, statsFrag, "stats").commit();
+
                                 getSupportActionBar().setDisplayShowCustomEnabled(false);
                                 custom_enabled = false;
                                 getSupportActionBar().setTitle("Stats");
                                 getSupportActionBar().show();
                                 break;
                             case R.id.action_timer:
-                                getSupportFragmentManager().beginTransaction().replace(R.id.entire_view, firstFragment).show(firstFragment).commit();
+                                getSupportFragmentManager().beginTransaction().replace(R.id.entire_view, firstFragment, "timer").show(firstFragment).commit();
+
                                 getSupportActionBar().hide();
                                 break;
                         }
