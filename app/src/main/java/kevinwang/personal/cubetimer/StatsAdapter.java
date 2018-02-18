@@ -46,11 +46,6 @@ public class StatsAdapter extends RecyclerView.Adapter<StatsAdapter.ViewHolder> 
     public void onBindViewHolder(ViewHolder holder, int position) {
         holder.descriptionTextView.setText(mDescriptionSet[position]);
         holder.timeTextView.setText(mTimeSet[position]);
-        /*if (position % 2 == 0) {
-            holder.cv.setCardBackgroundColor(Color.LTGRAY);
-        } else {
-            holder.cv.setCardBackgroundColor(Color.WHITE);
-        }*/
     }
 
     @Override

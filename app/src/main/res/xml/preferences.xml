@@ -26,9 +26,8 @@
         android:max="6"
         android:defaultValue="3" />
 
-    <SwitchPreference
-        android:key="recent_solve"
-        android:defaultValue="false"
-        android:title="Most recent solves first" />
+    <Preference
+        android:title="Clear all sessions"
+        android:key="clear_all" />
 
 </PreferenceScreen>

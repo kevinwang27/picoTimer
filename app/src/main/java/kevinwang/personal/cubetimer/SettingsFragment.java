@@ -1,10 +1,12 @@
 package kevinwang.personal.cubetimer;
 
 
+import android.content.DialogInterface;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.PreferenceFragment;
 import android.support.v4.app.Fragment;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.preference.Preference;
 import android.support.v7.preference.PreferenceFragmentCompat;
@@ -38,11 +40,37 @@ public class SettingsFragment extends PreferenceFragmentCompat implements Shared
     @Override
     public void onCreatePreferences(Bundle savedInstanceState, String rootKey) {
         addPreferencesFromResource(R.xml.preferences);
-        SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getContext());
+        final SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getContext());
         Preference session = findPreference("session");
         session.setSummary(sharedPreferences.getString("session", "1"));
         Preference theme = findPreference("theme");
         theme.setSummary(sharedPreferences.getString("theme", "BLACK"));
+        Preference clearAll = findPreference("clear_all");
+        clearAll.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
+            @Override
+            public boolean onPreferenceClick(Preference preference) {
+                AlertDialog.Builder ad = new AlertDialog.Builder(getContext());
+                ad.setTitle("Delete all sessions solves?");
+                ad.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        new Thread(new Runnable() {
+                            @Override
+                            public void run() {
+                                App.get().getDatabase().solveDao().clearSolves();
+                            }
+                        }).start();
+                        SharedPreferences.Editor editor = sharedPreferences.edit();
+                        editor.putBoolean("first_launch", true).apply();
+                    }
+                }).setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                    }
+                }).show();
+                return false;
+            }
+        });
     }
 
     @Override
