@@ -2,6 +2,7 @@ package kevinwang.personal.cubetimer;
 
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
@@ -9,6 +10,7 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.preference.PreferenceManager;
 import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
@@ -26,7 +28,8 @@ public class MainActivity extends AppCompatActivity {
     Fragment settingsFrag;
     Fragment statsFrag;
     Toolbar toolbar;
-    boolean custom_enabled; // whether custom view for toolbar is enabled
+    boolean custom_enabled;
+    SharedPreferences sharedPref;
 
     @Override
     protected void onCreate(final Bundle savedInstanceState) {
@@ -37,6 +40,7 @@ public class MainActivity extends AppCompatActivity {
         mBottomNavigationView = (BottomNavigationView) findViewById(R.id.bottom_navigation);
         toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+        sharedPref = PreferenceManager.getDefaultSharedPreferences(this);
 
         /* setup toolbar */
         LayoutInflater layoutInflater = LayoutInflater.from(this);
@@ -44,7 +48,7 @@ public class MainActivity extends AppCompatActivity {
         final TextView mTitleTextView = (TextView) view.findViewById(R.id.title_text);
         final ImageButton imageButton = (ImageButton) view.findViewById(R.id.imageButton);
 
-        BottomNavigationViewHelper.disableShiftMode(mBottomNavigationView); // display four titles
+        BottomNavigationViewHelper.disableShiftMode(mBottomNavigationView);
 
         mBottomNavigationView.setOnNavigationItemSelectedListener(
                 new BottomNavigationView.OnNavigationItemSelectedListener() {
@@ -56,11 +60,10 @@ public class MainActivity extends AppCompatActivity {
                                 FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
                                 if (!timerFrag.isHidden()) {
                                     transaction.hide(timerFrag);
+                                    transaction.add(R.id.entire_view, settingsFrag).commit();
                                 } else {
-                                    transaction.remove(getSupportFragmentManager().findFragmentById(R.id.entire_view));
+                                    transaction.replace(R.id.entire_view, settingsFrag).commit();
                                 }
-                                transaction.add(R.id.entire_view, settingsFrag).commit();
-                                
                                 getSupportActionBar().setDisplayShowCustomEnabled(false);
                                 custom_enabled = false;
                                 getSupportActionBar().setTitle("Settings");
@@ -100,6 +103,10 @@ public class MainActivity extends AppCompatActivity {
                                 getSupportActionBar().show();
                                 break;
                             case R.id.action_timer:
+                                if (timerFrag.isVisible()) {
+                                    break;
+                                }
+                                timerFrag = new TimerFragment();
                                 getSupportFragmentManager().beginTransaction().replace(R.id.entire_view, timerFrag).show(timerFrag).commit();
 
                                 getSupportActionBar().hide();
@@ -144,6 +151,22 @@ public class MainActivity extends AppCompatActivity {
 
             getSupportActionBar().hide();
         }
+    }
+
+    @Override
+    public void onStart() {
+        super.onStart();
+
+        SharedPreferences.Editor editor = sharedPref.edit();
+        editor.putBoolean("first_launch", false).apply();
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+
+        SharedPreferences.Editor editor = sharedPref.edit();
+        editor.putBoolean("first_launch", true).apply();
     }
 
     @Override

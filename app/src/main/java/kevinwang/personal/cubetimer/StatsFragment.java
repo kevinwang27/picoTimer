@@ -70,9 +70,12 @@ public class StatsFragment extends Fragment {
 
     private long stringToLong(String input) {
         int minutes, seconds, milli;
-        String[] arr = input.replaceAll("\\s", "").split(":");
+        input = input.replaceAll("\\s", "");
+        String[] arr = input.split(":");
         if (arr[arr.length - 1].contains("(+2)")) {
             arr[arr.length - 1] = arr[arr.length - 1].replace("(+2)", "");
+        } else if (arr[0].contains("DNF")) {
+            arr = input.replace("DNF(", "").replace(")", "").split(":");
         }
         if (arr.length == 2) {
             milli = Integer.parseInt(arr[1]);

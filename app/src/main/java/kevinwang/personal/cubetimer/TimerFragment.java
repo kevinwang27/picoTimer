@@ -65,10 +65,18 @@ public class TimerFragment extends Fragment {
 
         sharedPref = PreferenceManager.getDefaultSharedPreferences(getContext());
         /* default timer values */
-        mTextTimer.setTextSize(sharedPref.getInt("timer_size", 5)* 10 + 60);
+        mTextTimer.setTextSize(sharedPref.getInt("timer_size", 5) * 8 + 40);
+        mScrambleText.setTextSize(sharedPref.getInt("scramble_size", 3) * 2 + 14);
 
         if (savedInstanceState == null) {
-            mScrambleText.setText(generateScramble());
+            mScrambleText.setText(sharedPref.getString("current_scramble", generateScramble()));
+            if (sharedPref.getBoolean("first_launch", true)) {
+                mTextTimer.setText("0:00");
+            } else {
+                mTextTimer.setText(sharedPref.getString("current_time", "0:00"));
+            }
+            SharedPreferences.Editor editor = sharedPref.edit();
+            editor.putString("current_scramble", mScrambleText.getText().toString()).apply();
         } else {
             if (savedInstanceState.getBoolean("scramble_visible")) {
                 mScrambleText.setText(savedInstanceState.getString("scramble"));
@@ -179,6 +187,9 @@ public class TimerFragment extends Fragment {
                         insertSolve();
 
                         mScrambleText.setText(generateScramble());
+                        SharedPreferences.Editor editor = sharedPref.edit();
+                        editor.putString("current_time", mTextTimer.getText().toString());
+                        editor.putString("current_scramble" , mScrambleText.getText().toString()).apply();
                         mScrambleText.setVisibility(View.VISIBLE);
                         mBottomNavigationView.setVisibility(View.VISIBLE);
                     }

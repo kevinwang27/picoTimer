@@ -104,7 +104,8 @@ public class TimesAdapter extends RecyclerView.Adapter<TimesAdapter.ViewHolder> 
 
         private String addTwoSecondsToString(String time_input) {
             int minutes, seconds, milli;
-            String[] arr = time_input.replaceAll("\\s", "").split(":");
+            time_input = time_input.replaceAll("\\s", "");
+            String[] arr = time_input.split(":");
             if (arr.length == 2) {
                 milli = Integer.parseInt(arr[1]);
                 seconds = Integer.parseInt(arr[0]);
@@ -142,7 +143,6 @@ public class TimesAdapter extends RecyclerView.Adapter<TimesAdapter.ViewHolder> 
 
             mDataSet.remove(getAdapterPosition());
             notifyItemRemoved(getAdapterPosition());
-            notifyItemRangeChanged(getAdapterPosition(), mDataSet.size());
         }
     }
 
@@ -163,11 +163,6 @@ public class TimesAdapter extends RecyclerView.Adapter<TimesAdapter.ViewHolder> 
         holder.timeTextView.setText(mDataSet.get(position).getSolveTime());
         holder.scrambleTextView.setText(mDataSet.get(position).getScramble());
         holder.oldTimeTextView.setText(mDataSet.get(position).getOldTime());
-        if (position % 2 == 0) {
-            holder.cv.setCardBackgroundColor(Color.LTGRAY);
-        } else {
-            holder.cv.setCardBackgroundColor(Color.WHITE);
-        }
     }
 
     @Override

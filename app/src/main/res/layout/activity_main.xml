@@ -31,8 +31,8 @@
         android:layout_gravity="bottom"
         android:visibility="visible"
         app:itemBackground="@color/black"
-        app:itemIconTint="@drawable/item_color_state"
-        app:itemTextColor="@drawable/item_color_state"
+        app:itemIconTint="@color/white"
+        app:itemTextColor="@color/white"
         app:menu="@menu/bottom_navigation_main" />
 
 </LinearLayout>
