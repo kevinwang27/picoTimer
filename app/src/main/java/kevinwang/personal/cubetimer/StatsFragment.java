@@ -79,7 +79,8 @@ public class StatsFragment extends Fragment {
         if (arr[arr.length - 1].contains("(+2)")) {
             arr[arr.length - 1] = arr[arr.length - 1].replace("(+2)", "");
         } else if (arr[0].contains("DNF")) {
-            arr = input.replace("DNF(", "").replace(")", "").split(":");
+            //arr = input.replace("DNF(", "").replace(")", "").split(":");
+            return -1;
         }
         if (arr.length == 2) {
             milli = Integer.parseInt(arr[1]);
@@ -94,6 +95,9 @@ public class StatsFragment extends Fragment {
     }
 
     private String longToString(long input) {
+        if (input == -99) {
+            return "DNF";
+        }
         int milli = (int) input % 100;
         int total_seconds = (int) (input / 100);
         int seconds = total_seconds % 60;
@@ -122,16 +126,27 @@ public class StatsFragment extends Fragment {
         Collections.reverse(copy);
         int count = 0;
         long total = 0;
+        int dnf_count = 0;
         List<Long> nums = new ArrayList<>();
         for (long num : copy) {
             if (count < n) {
-                total += num;
-                nums.add(num);
+                if (num >= 0) {
+                    total += num;
+                    nums.add(num);
+                } else {
+                    dnf_count++;
+                }
                 count++;
+
             }
         }
-        total -= Collections.min(nums);
+        if (dnf_count == 0) {
+            total -= Collections.min(nums);
+        } else if (dnf_count >= 2) {
+            return -99;
+        }
         total -= Collections.max(nums);
+
         return total / (count - 2);
     }
 
@@ -143,7 +158,7 @@ public class StatsFragment extends Fragment {
         } else {
             long currAoF = calcAoN(n, list);
             long restBestAof = getBestAoN(n, removeLastAndReturn(list));
-            if (currAoF < restBestAof) {
+            if ((currAoF < restBestAof && currAoF > 0) || (restBestAof == -99 && currAoF > 0)) {
                 return currAoF;
             } else {
                 return restBestAof;
@@ -158,18 +173,24 @@ public class StatsFragment extends Fragment {
     }
 
     private void initTimes(List<Solve> solves, List<Long> solveTimes) {
-        mTimes[0] = String.valueOf(solves.size());
-        if (solveTimes.size() > 0) {
-            mTimes[1] = longToString(Collections.min(solveTimes));
-            mTimes[2] = longToString(Collections.max(solveTimes));
-            if (solveTimes.size() == 1) {
-                mTimes[3] = longToString(solveTimes.get(0));
-            } else if (solveTimes.size() == 2) {
-                mTimes[3] = longToString((solveTimes.get(0) + solveTimes.get(1)) / 2);
-            } else {
-                mTimes[3] = longToString(calcAoN(solveTimes.size(), solveTimes));
+        ArrayList<Long> posSolveTimes = new ArrayList<>();
+        for (long time : solveTimes) {
+            if (time > 0) {
+                posSolveTimes.add(time);
             }
-            mTimes[4] = longToString(calcMean(solveTimes));
+        }
+        mTimes[0] = String.valueOf(solves.size());
+        if (posSolveTimes.size() > 0) {
+            mTimes[1] = longToString(Collections.min(posSolveTimes));
+            mTimes[2] = longToString(Collections.max(posSolveTimes));
+            if (posSolveTimes.size() == 1) {
+                mTimes[3] = longToString(posSolveTimes.get(0));
+            } else if (posSolveTimes.size() == 2) {
+                mTimes[3] = longToString((posSolveTimes.get(0) + posSolveTimes.get(1)) / 2);
+            } else {
+                mTimes[3] = longToString(calcAoN(posSolveTimes.size(), posSolveTimes));
+            }
+            mTimes[4] = longToString(calcMean(posSolveTimes));
             if (solveTimes.size() < 5) {
                 mTimes[5] = " - ";
                 mTimes[6] = " - ";
