@@ -5,6 +5,13 @@
         android:defaultValue="black_and_white"
         android:title="Theme"/>
 
+    <ListPreference
+        android:key="session"
+        android:title="Session"
+        android:defaultValue="one"
+        android:entries="@array/session_numbers"
+        android:entryValues="@array/session_ids" />
+
     <SeekBarPreference
         android:key="timer_size"
         android:title="Timer text size:"

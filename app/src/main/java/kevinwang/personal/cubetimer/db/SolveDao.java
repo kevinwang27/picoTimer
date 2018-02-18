@@ -21,6 +21,9 @@ public interface SolveDao {
     @Query("DELETE FROM solve")
     public void clearSolves();
 
+    @Query("DELETE FROM solve WHERE session = :session")
+    public void clearSolvesBySession(String session);
+
     @Query("UPDATE solve SET solve_time = :time WHERE scramble = :scramble")
     public void setSolveTimeByScramble(String scramble, String time);
 
@@ -29,4 +32,7 @@ public interface SolveDao {
 
     @Query("SELECT * FROM solve")
     public List<Solve> loadAllSolves();
+
+    @Query("SELECT * FROM solve WHERE session = :session")
+    public List<Solve> loadAllSolvesBySession(String session);
 }

@@ -1,7 +1,10 @@
 package kevinwang.personal.cubetimer;
 
 
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.preference.PreferenceFragment;
+import android.preference.PreferenceManager;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -19,6 +22,7 @@ import kevinwang.personal.cubetimer.db.entity.Solve;
 public class TimesFragment extends Fragment {
 
     protected RecyclerView mRecyclerView;
+    SharedPreferences sharedPref;
 
     public TimesFragment() {
         // Required empty public constructor
@@ -34,6 +38,7 @@ public class TimesFragment extends Fragment {
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_times, container, false);
         mRecyclerView = (RecyclerView) view.findViewById(R.id.timeRecycler);
+        sharedPref = PreferenceManager.getDefaultSharedPreferences(getContext());
 
         return view;
     }
@@ -45,7 +50,7 @@ public class TimesFragment extends Fragment {
         new Thread(new Runnable() {
             @Override
             public void run() {
-                List<Solve> solves = App.get().getDatabase().solveDao().loadAllSolves();
+                List<Solve> solves = App.get().getDatabase().solveDao().loadAllSolvesBySession(sharedPref.getString("session", "1"));
                 initDataSet(solves);
             }
         }).start();

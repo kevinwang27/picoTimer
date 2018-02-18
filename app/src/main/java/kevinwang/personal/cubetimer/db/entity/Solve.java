@@ -3,6 +3,7 @@ package kevinwang.personal.cubetimer.db.entity;
 import android.arch.persistence.room.ColumnInfo;
 import android.arch.persistence.room.Entity;
 import android.arch.persistence.room.PrimaryKey;
+import android.content.SharedPreferences;
 
 /**
  * Created by kevinwang on 2/9/18.
@@ -19,6 +20,8 @@ public class Solve {
     private String oldTime;
 
     private String scramble;
+
+    private String session;
 
     public int getSolve_num() {
         return solve_num;
@@ -50,5 +53,13 @@ public class Solve {
 
     public void setOldTime(String oldTime) {
         this.oldTime = oldTime;
+    }
+
+    public String getSession() {
+        return session;
+    }
+
+    public void setSession(String session) {
+        this.session = session;
     }
 }

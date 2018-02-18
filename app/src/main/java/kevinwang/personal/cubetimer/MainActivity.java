@@ -76,7 +76,7 @@ public class MainActivity extends AppCompatActivity {
                                     transaction2.hide(timerFrag);
                                 }
                                 transaction2.add(R.id.entire_view, timesFrag).commit();
-                                mTitleTextView.setText(R.string.action_solves_title);
+                                mTitleTextView.setText("Solves: Session " + sharedPref.getString("session", "1"));
                                 imageButton.setOnClickListener(new View.OnClickListener() {
                                     @Override
                                     public void onClick(View view) {
@@ -99,7 +99,7 @@ public class MainActivity extends AppCompatActivity {
 
                                 getSupportActionBar().setDisplayShowCustomEnabled(false);
                                 custom_enabled = false;
-                                getSupportActionBar().setTitle("Stats");
+                                getSupportActionBar().setTitle("Stats: Session " + sharedPref.getString("session", "1"));
                                 getSupportActionBar().show();
                                 break;
                             case R.id.action_timer:
@@ -128,7 +128,7 @@ public class MainActivity extends AppCompatActivity {
                     } else {
                         getSupportActionBar().setCustomView(view);
                         custom_enabled = true;
-                        mTitleTextView.setText(R.string.action_solves_title);
+                        mTitleTextView.setText("Solves: Session " + sharedPref.getString("session", "1"));
                         imageButton.setOnClickListener(new View.OnClickListener() {
                             @Override
                             public void onClick(View view) {
@@ -188,7 +188,7 @@ public class MainActivity extends AppCompatActivity {
                 new Thread(new Runnable() {
                     @Override
                     public void run() {
-                        App.get().getDatabase().solveDao().clearSolves();
+                        App.get().getDatabase().solveDao().clearSolvesBySession(sharedPref.getString("session", "1"));
                     }
                 }).start();
                 timesFrag = new TimesFragment();
