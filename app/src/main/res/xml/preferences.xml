@@ -17,8 +17,8 @@
     <SeekBarPreference
         android:key="timer_size"
         android:title="Timer text size:"
-        android:max="10"
-        android:defaultValue="5" />
+        android:max="6"
+        android:defaultValue="4" />
 
     <SeekBarPreference
         android:key="scramble_size"

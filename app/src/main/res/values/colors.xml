@@ -9,5 +9,16 @@
     <color name="darkBlue">#1d2f4c</color>
     <color name="darkerBlue">#101a2b</color>
     <color name="pink">#e43ed6</color>
+    <color name="blue">#3180ef</color>
+    <color name="green">#21b42a</color>
+    <color name="red">#d72a2a</color>
+    <color name="purple">#c051f7</color>
+    <color name="unicorn">#e43ed6</color>
     <color name="darkgray">#2e2e2e</color>
+    <color name="whitediff">#a7a7a7</color>
+    <color name="bluediff">#0e4ba3</color>
+    <color name="greendiff">#097410</color>
+    <color name="reddiff">#7c1515</color>
+    <color name="purplediff">#6c2b8c</color>
+    <color name="unicorndiff">#b12ea6</color>
 </resources>
