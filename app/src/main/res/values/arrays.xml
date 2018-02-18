@@ -16,4 +16,23 @@
         <item>5</item>
     </string-array>
 
+    <string-array name="theme_names">
+        <item>Black</item>
+        <item>White</item>
+        <item>Blue</item>
+        <item>Green</item>
+        <item>Red</item>
+        <item>Purple</item>
+        <item>UNICORN</item>
+    </string-array>
+
+    <string-array name="theme_colors">
+        <item>BLACK</item>
+        <item>WHITE</item>
+        <item>BLUE</item>
+        <item>GREEN</item>
+        <item>RED</item>
+        <item>PURPLE</item>
+        <item>Unicorn</item>
+    </string-array>
 </resources>

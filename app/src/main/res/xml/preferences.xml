@@ -3,7 +3,9 @@
     <ListPreference
         android:key="theme"
         android:defaultValue="black_and_white"
-        android:title="Theme"/>
+        android:title="Theme"
+        android:entries="@array/theme_names"
+        android:entryValues="@array/theme_colors" />
 
     <ListPreference
         android:key="session"

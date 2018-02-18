@@ -18,6 +18,22 @@ import android.view.View;
 import android.widget.ImageButton;
 import android.widget.TextView;
 
+/*
+timer bg
+activity bg
+drawer bg
+drawer text
+drawer icon
+timer text
+scramble text
+toolbar custom
+toolbar
+solve card
+solves bg
+stats bg
+settings bg
+ */
+
 public class MainActivity extends AppCompatActivity {
 
     View background;
