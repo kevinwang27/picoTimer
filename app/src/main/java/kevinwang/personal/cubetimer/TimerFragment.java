@@ -63,7 +63,6 @@ public class TimerFragment extends Fragment {
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
 
-        sharedPref = PreferenceManager.getDefaultSharedPreferences(getContext());
         /* default timer values */
         mTextTimer.setTextSize(sharedPref.getInt("timer_size", 5) * 8 + 40);
         mScrambleText.setTextSize(sharedPref.getInt("scramble_size", 3) * 2 + 14);
@@ -164,6 +163,24 @@ public class TimerFragment extends Fragment {
         mScrambleText = (TextView) view.findViewById(R.id.scramble);
         mBottomNavigationView = (BottomNavigationView) getActivity().findViewById(R.id.bottom_navigation);
         background = getActivity().findViewById(R.id.container);
+        sharedPref = PreferenceManager.getDefaultSharedPreferences(getContext());
+        switch (sharedPref.getString("theme", "BLACK")) {
+            case "BLACK":
+                view.setBackgroundColor(getResources().getColor(R.color.black));
+                break;
+            case "WHITE":
+                break;
+            case "BLUE":
+                break;
+            case "GREEN":
+                break;
+            case "RED":
+                break;
+            case "PURPLE":
+                break;
+            case "Unicorn":
+                break;
+        }
 
         time_running = false;
 
@@ -174,8 +191,24 @@ public class TimerFragment extends Fragment {
                 if (motionEvent.getAction() == MotionEvent.ACTION_DOWN) {
                     if (time_running == false) {
                         // Indicate holding down
-                        view.setBackgroundColor(getResources().getColor(R.color.darkerBlue));
-                        background.setBackgroundColor(getResources().getColor(R.color.darkerBlue));
+                        switch (sharedPref.getString("theme", "BLACK")) {
+                            case "BLACK":
+                                view.setBackgroundColor(getResources().getColor(R.color.darkgray));
+                                background.setBackgroundColor(getResources().getColor(R.color.darkgray));
+                                break;
+                            case "WHITE":
+                                break;
+                            case "BLUE":
+                                break;
+                            case "GREEN":
+                                break;
+                            case "RED":
+                                break;
+                            case "PURPLE":
+                                break;
+                            case "Unicorn":
+                                break;
+                        }
                         mTextTimer.setText(R.string.start_time);
                         mScrambleText.setVisibility(View.INVISIBLE);
                         mBottomNavigationView.setVisibility(View.INVISIBLE);
@@ -198,8 +231,25 @@ public class TimerFragment extends Fragment {
                 } else if (motionEvent.getAction() == MotionEvent.ACTION_UP) {
                     if (time_running == false) {
                         // Start the timer
-                        view.setBackgroundColor(getResources().getColor(R.color.darkBlue));
-                        background.setBackgroundColor(getResources().getColor(R.color.darkBlue));
+                        switch (sharedPref.getString("theme", "BLACK")) {
+                            case "BLACK":
+                                view.setBackgroundColor(getResources().getColor(R.color.black));
+                                background.setBackgroundColor(getResources().getColor(R.color.black));
+                                break;
+                            case "WHITE":
+                                break;
+                            case "BLUE":
+                                break;
+                            case "GREEN":
+                                break;
+                            case "RED":
+                                break;
+                            case "PURPLE":
+                                break;
+                            case "Unicorn":
+                                break;
+                        }
+
                         startTime = SystemClock.uptimeMillis();
                         customHandler.postDelayed(updateTimerThread, 0);
                         time_running = true;

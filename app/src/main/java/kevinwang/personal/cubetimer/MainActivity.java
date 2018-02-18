@@ -19,7 +19,7 @@ import android.widget.ImageButton;
 import android.widget.TextView;
 
 /*
-timer bg
+timer bg     change toolbar bg and text for black theme
 activity bg
 drawer bg
 drawer text
@@ -32,7 +32,7 @@ solve card
 solves bg
 stats bg
 settings bg
- */
+*/
 
 public class MainActivity extends AppCompatActivity {
 

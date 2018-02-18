@@ -2,7 +2,7 @@
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
     <ListPreference
         android:key="theme"
-        android:defaultValue="black_and_white"
+        android:defaultValue="BLACK"
         android:title="Theme"
         android:entries="@array/theme_names"
         android:entryValues="@array/theme_colors" />
@@ -10,7 +10,7 @@
     <ListPreference
         android:key="session"
         android:title="Session"
-        android:defaultValue="one"
+        android:defaultValue="1"
         android:entries="@array/session_numbers"
         android:entryValues="@array/session_ids" />
 
