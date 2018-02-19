@@ -45,10 +45,14 @@ public class TimesAdapter extends RecyclerView.Adapter<TimesAdapter.ViewHolder> 
             arrow.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
+                    /* build new alert dialog */
                     AlertDialog.Builder ad = new AlertDialog.Builder(v.getContext());
+
+                    /* inflate custom alert dialog layout */
                     LayoutInflater layoutInflater = (LayoutInflater) v.getContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
                     final View dialog = layoutInflater.inflate(R.layout.dialog_solve, null);
 
+                    /* find views in alert dialog */
                     TextView title = (TextView) dialog.findViewById(R.id.dialog_title);
                     TextView message = (TextView) dialog.findViewById(R.id.dialog_message);
                     Button cleanButton = (Button) dialog.findViewById(R.id.clean_button);
@@ -56,9 +60,11 @@ public class TimesAdapter extends RecyclerView.Adapter<TimesAdapter.ViewHolder> 
                     Button dnfButton = (Button) dialog.findViewById(R.id.dnf_button);
                     Button deleteButton = (Button) dialog.findViewById(R.id.delete_button);
 
+                    /* display time and scramble */
                     title.setText(timeTextView.getText().toString().replaceAll("\\s", ""));
                     message.setText(scrambleTextView.getText().toString());
 
+                    /* show the alert dialog */
                     ad.setView(dialog);
                     final AlertDialog alertDialog = ad.show();
 
@@ -95,6 +101,9 @@ public class TimesAdapter extends RecyclerView.Adapter<TimesAdapter.ViewHolder> 
             });
         }
 
+        /*
+         * change the database and set the time textview
+         */
         private void setSolveTime(final String time) {
             new Thread(new Runnable() {
                 @Override
@@ -105,6 +114,9 @@ public class TimesAdapter extends RecyclerView.Adapter<TimesAdapter.ViewHolder> 
             timeTextView.setText(time);
         }
 
+        /*
+         * add two seconds to the string
+         */
         private String addTwoSecondsToString(String time_input) {
             int minutes, seconds, milli;
             time_input = time_input.replaceAll("\\s", "");
@@ -131,11 +143,17 @@ public class TimesAdapter extends RecyclerView.Adapter<TimesAdapter.ViewHolder> 
                     + String.format("%02d", milli);
         }
 
+        /*
+         * set the time textview and database solve time to time + 2 seconds
+         */
         private void addTwoSeconds() {
             final String curr_solve_time = oldTimeTextView.getText().toString();
             setSolveTime(addTwoSecondsToString(curr_solve_time) + "(+2)");
         }
 
+        /*
+         * remove the solve from recyclerview and database
+         */
         private void removeSolve() {
             new Thread(new Runnable() {
                 @Override

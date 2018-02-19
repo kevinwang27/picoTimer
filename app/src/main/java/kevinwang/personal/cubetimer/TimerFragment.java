@@ -25,9 +25,9 @@ import kevinwang.personal.cubetimer.db.entity.Solve;
  */
 public class TimerFragment extends Fragment {
 
-    public TextView mTextTimer;
+    TextView mTextTimer;
     Handler customHandler = new Handler();
-    public TextView mScrambleText;
+    TextView mScrambleText;
     BottomNavigationView mBottomNavigationView;
     View background;
     SharedPreferences sharedPref;
@@ -71,6 +71,8 @@ public class TimerFragment extends Fragment {
         /* default timer values */
         mTextTimer.setTextSize(sharedPref.getInt("timer_size", 3) * 8 + 50);
         mScrambleText.setTextSize(sharedPref.getInt("scramble_size", 3) * 2 + 15);
+
+        /* set timer and scramble text colors */
         if (sharedPref.getString("theme", "BLACK").equals("WHITE")) {
             mTextTimer.setTextColor(getResources().getColor(R.color.black));
             mScrambleText.setTextColor(getResources().getColor(R.color.black));
@@ -79,8 +81,8 @@ public class TimerFragment extends Fragment {
             mScrambleText.setTextColor(getResources().getColor(R.color.white));
         }
 
-
         if (savedInstanceState == null) {
+            /* first launch of app */
             mScrambleText.setText(sharedPref.getString("current_scramble", generateScramble()));
             if (sharedPref.getBoolean("first_launch", true)) {
                 mTextTimer.setText("0:00");
@@ -90,6 +92,7 @@ public class TimerFragment extends Fragment {
             SharedPreferences.Editor editor = sharedPref.edit();
             editor.putString("current_scramble", mScrambleText.getText().toString()).apply();
         } else {
+            /* rotations, etc within app */
             if (savedInstanceState.getBoolean("scramble_visible")) {
                 mScrambleText.setText(savedInstanceState.getString("scramble"));
                 mTextTimer.setText(savedInstanceState.getString("time_text"));
@@ -177,6 +180,7 @@ public class TimerFragment extends Fragment {
         mBottomNavigationView = (BottomNavigationView) getActivity().findViewById(R.id.bottom_navigation);
         background = getActivity().findViewById(R.id.container);
         sharedPref = PreferenceManager.getDefaultSharedPreferences(getContext());
+
         switch (sharedPref.getString("theme", "BLACK")) {
             case "BLACK":
                 view.setBackgroundColor(getResources().getColor(R.color.black));
