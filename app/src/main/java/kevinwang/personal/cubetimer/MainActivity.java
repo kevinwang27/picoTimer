@@ -13,7 +13,6 @@ import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.preference.PreferenceManager;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.Display;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
@@ -21,24 +20,7 @@ import android.view.View;
 import android.widget.ImageButton;
 import android.widget.TextView;
 
-/*
-timer bg     change toolbar bg and text for black theme
-activity bg
-drawer bg
-drawer text
-drawer icon
-timer text
-scramble text
-toolbar custom
-toolbar
-solve card
-solves bg
-stats bg
-settings bg
-*/
-
 public class MainActivity extends AppCompatActivity {
-
     View background;
     BottomNavigationView mBottomNavigationView;
     Fragment timerFrag;
