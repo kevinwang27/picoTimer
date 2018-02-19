@@ -44,7 +44,8 @@
             android:minHeight="36dp"
             android:minWidth="72dp"
             android:text="clean"
-            android:textColor="@color/pink" />
+            android:textColor="@color/pink"
+            android:textSize="12sp"/>
 
         <Button
             android:id="@+id/plus_two_button"
@@ -54,7 +55,8 @@
             android:minHeight="36dp"
             android:minWidth="72dp"
             android:text="+2"
-            android:textColor="@color/pink" />
+            android:textColor="@color/pink"
+            android:textSize="12sp"/>
 
         <Button
             android:id="@+id/dnf_button"
@@ -64,16 +66,18 @@
             android:minHeight="36dp"
             android:minWidth="72dp"
             android:text="DNF"
-            android:textColor="@color/pink" />
+            android:textColor="@color/pink"
+            android:textSize="12sp"/>
 
         <Button
             android:id="@+id/delete_button"
             style="?android:attr/borderlessButtonStyle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:minHeight="36dp"
-            android:minWidth="72dp"
+            android:minHeight="0dp"
+            android:minWidth="0dp"
             android:text="Delete"
-            android:textColor="@color/pink" />
+            android:textColor="@color/pink"
+            android:textSize="12sp"/>
     </LinearLayout>
 </LinearLayout>
