@@ -156,14 +156,6 @@ public class MainActivity extends AppCompatActivity {
     }
 
     @Override
-    public void onStart() {
-        super.onStart();
-
-        SharedPreferences.Editor editor = sharedPref.edit();
-        editor.putBoolean("first_launch", false).apply();
-    }
-
-    @Override
     public void onPause() {
         super.onPause();
 
@@ -223,7 +215,7 @@ public class MainActivity extends AppCompatActivity {
             case "Purple":
                 toolbar.setBackgroundColor(getResources().getColor(R.color.purple));
                 break;
-            case "Unicorn":
+            case "Pink":
                 toolbar.setBackgroundColor(getResources().getColor(R.color.unicorn));
                 break;
         }
@@ -254,7 +246,7 @@ public class MainActivity extends AppCompatActivity {
             case "Purple":
                 toolbar.setBackgroundColor(getResources().getColor(R.color.purple));
                 break;
-            case "Unicorn":
+            case "Pink":
                 toolbar.setBackgroundColor(getResources().getColor(R.color.unicorn));
                 break;
         }

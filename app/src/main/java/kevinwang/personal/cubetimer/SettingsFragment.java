@@ -111,7 +111,7 @@ public class SettingsFragment extends PreferenceFragmentCompat implements Shared
             case "Purple":
                 toolbar.setBackgroundColor(getResources().getColor(R.color.purple));
                 break;
-            case "Unicorn":
+            case "Pink":
                 toolbar.setBackgroundColor(getResources().getColor(R.color.unicorn));
                 break;
         }

@@ -200,8 +200,8 @@ public class TimerFragment extends Fragment {
             case "Purple":
                 view.setBackgroundColor(getResources().getColor(R.color.purple));
                 break;
-            case "Unicorn":
-                view.setBackgroundColor(getResources().getColor(R.color.pink));
+            case "Pink":
+                view.setBackgroundColor(getResources().getColor(R.color.unicorn));
                 break;
         }
 
@@ -239,7 +239,7 @@ public class TimerFragment extends Fragment {
                                 view.setBackgroundColor(getResources().getColor(R.color.purplediff));
                                 background.setBackgroundColor(getResources().getColor(R.color.purplediff));
                                 break;
-                            case "Unicorn":
+                            case "Pink":
                                 view.setBackgroundColor(getResources().getColor(R.color.unicorndiff));
                                 background.setBackgroundColor(getResources().getColor(R.color.unicorndiff));
                                 break;
@@ -291,11 +291,14 @@ public class TimerFragment extends Fragment {
                                 view.setBackgroundColor(getResources().getColor(R.color.purple));
                                 background.setBackgroundColor(getResources().getColor(R.color.purple));
                                 break;
-                            case "Unicorn":
+                            case "Pink":
                                 view.setBackgroundColor(getResources().getColor(R.color.unicorn));
                                 background.setBackgroundColor(getResources().getColor(R.color.unicorn));
                                 break;
                         }
+
+                        SharedPreferences.Editor editor = sharedPref.edit();
+                        editor.putBoolean("first_launch", false).apply();
 
                         startTime = SystemClock.uptimeMillis();
                         customHandler.postDelayed(updateTimerThread, 0);

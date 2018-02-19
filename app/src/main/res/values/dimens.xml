@@ -8,5 +8,4 @@
     <dimen name="scramble_text_size">20sp</dimen>
     <dimen name="padding_scramble_lr">10dp</dimen>
     <dimen name="scramble_top_margin">25dp</dimen>
-    <item name="scramble_extra_line_spacing" type="dimen" format="float">7.5sp</item>
 </resources>

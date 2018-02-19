@@ -6,6 +6,11 @@
         <item>3</item>
         <item>4</item>
         <item>5</item>
+        <item>6</item>
+        <item>7</item>
+        <item>8</item>
+        <item>9</item>
+        <item>10</item>
     </string-array>
 
     <string-array name="session_ids">
@@ -14,6 +19,11 @@
         <item>3</item>
         <item>4</item>
         <item>5</item>
+        <item>6</item>
+        <item>7</item>
+        <item>8</item>
+        <item>9</item>
+        <item>10</item>
     </string-array>
 
     <string-array name="theme_names">
@@ -23,7 +33,7 @@
         <item>Green</item>
         <item>Red</item>
         <item>Purple</item>
-        <item>Unicorn</item>
+        <item>Pink</item>
     </string-array>
 
     <string-array name="theme_colors">
@@ -33,6 +43,6 @@
         <item>Green</item>
         <item>Red</item>
         <item>Purple</item>
-        <item>Unicorn</item>
+        <item>Pink</item>
     </string-array>
 </resources>
