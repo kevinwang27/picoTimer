@@ -3,4 +3,6 @@
     <string name="start_time">0:00</string>
     <string name="scramble_header">Scramble:</string>
     <string name="action_solves_title">Solves</string>
+    <string name="delete_all_sessions_dialogText">Delete all sessions solves?</string>
+    <string name="dialog_ok">Ok</string>
 </resources>

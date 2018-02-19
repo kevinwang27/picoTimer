@@ -51,7 +51,7 @@ public class SettingsFragment extends PreferenceFragmentCompat implements Shared
             @Override
             public boolean onPreferenceClick(Preference preference) {
                 AlertDialog.Builder ad = new AlertDialog.Builder(getContext());
-                ad.setTitle("Delete all sessions solves?");
+                ad.setTitle(R.string.delete_all_sessions_dialogText);
                 ad.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {

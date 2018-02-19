@@ -104,7 +104,7 @@ public class StatsAdapter extends RecyclerView.Adapter<StatsAdapter.ViewHolder> 
         titleView.setTextSize(20);
 
         ad.setCustomTitle(titleView);
-        ad.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+        ad.setPositiveButton(R.string.dialog_ok, new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
             }
