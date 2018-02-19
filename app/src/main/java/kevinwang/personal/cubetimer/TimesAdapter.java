@@ -99,6 +99,63 @@ public class TimesAdapter extends RecyclerView.Adapter<TimesAdapter.ViewHolder> 
                     });
                 }
             });
+            cv.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    /* build new alert dialog */
+                    AlertDialog.Builder ad = new AlertDialog.Builder(v.getContext());
+
+                    /* inflate custom alert dialog layout */
+                    LayoutInflater layoutInflater = (LayoutInflater) v.getContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+                    final View dialog = layoutInflater.inflate(R.layout.dialog_solve, null);
+
+                    /* find views in alert dialog */
+                    TextView title = (TextView) dialog.findViewById(R.id.dialog_title);
+                    TextView message = (TextView) dialog.findViewById(R.id.dialog_message);
+                    Button cleanButton = (Button) dialog.findViewById(R.id.clean_button);
+                    Button plusTwoButton = (Button) dialog.findViewById(R.id.plus_two_button);
+                    Button dnfButton = (Button) dialog.findViewById(R.id.dnf_button);
+                    Button deleteButton = (Button) dialog.findViewById(R.id.delete_button);
+
+                    /* display time and scramble */
+                    title.setText(timeTextView.getText().toString().replaceAll("\\s", ""));
+                    message.setText(scrambleTextView.getText().toString());
+
+                    /* show the alert dialog */
+                    ad.setView(dialog);
+                    final AlertDialog alertDialog = ad.show();
+
+                    cleanButton.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View view) {
+                            setSolveTime(oldTimeTextView.getText().toString());
+                            alertDialog.dismiss();
+                        }
+                    });
+                    plusTwoButton.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View view) {
+                            addTwoSeconds();
+                            alertDialog.dismiss();
+                        }
+                    });
+                    dnfButton.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View view) {
+                            setSolveTime(" DNF(" + oldTimeTextView.getText().toString()
+                                    .replaceAll("\\s", "") + ")");
+                            alertDialog.dismiss();
+                        }
+                    });
+                    deleteButton.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View view) {
+                            removeSolve();
+                            alertDialog.dismiss();
+                        }
+                    });
+                }
+            });
         }
 
         /*

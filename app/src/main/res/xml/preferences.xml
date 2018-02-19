@@ -2,7 +2,7 @@
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
     <ListPreference
         android:key="theme"
-        android:defaultValue="BLACK"
+        android:defaultValue="Black"
         android:title="Theme"
         android:entries="@array/theme_names"
         android:entryValues="@array/theme_colors" />
