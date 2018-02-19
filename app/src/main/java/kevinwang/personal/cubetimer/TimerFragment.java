@@ -45,8 +45,13 @@ public class TimerFragment extends Fragment {
             secs = secs % 60;
             int milliseconds = (int) ((updateTime % 1000) / 10);
             if (mins == 0) {
-                mTextTimer.setText("" + String.format("%2d", secs) + ":"
-                        + String.format("%02d", milliseconds));
+                if (secs >= 10) {
+                    mTextTimer.setText("" + String.format("%2d", secs) + ":"
+                            + String.format("%02d", milliseconds));
+                } else {
+                    mTextTimer.setText("" + String.format("%1d", secs) + ":"
+                            + String.format("%02d", milliseconds));
+                }
             } else {
                 mTextTimer.setText("" + mins + ":" + String.format("%02d", secs) + ":"
                         + String.format("%02d", milliseconds));
