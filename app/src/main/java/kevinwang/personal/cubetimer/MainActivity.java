@@ -83,7 +83,7 @@ public class MainActivity extends AppCompatActivity {
                                     }
                                 });
 
-                                setCustomToolbarSettings(view, mTitleTextView);
+                                setCustomToolbarSettings(view, mTitleTextView, imageButton);
                                 setToolbarSettings(toolbar);
 
                                 getSupportActionBar().setCustomView(view);
@@ -130,7 +130,7 @@ public class MainActivity extends AppCompatActivity {
                     if (!custom_visible) {
                         getSupportActionBar().setTitle(savedInstanceState.getString("action_bar_title"));
                     } else {
-                        setCustomToolbarSettings(view, mTitleTextView);
+                        setCustomToolbarSettings(view, mTitleTextView, imageButton);
                         getSupportActionBar().setCustomView(view);
                         custom_enabled = true;
                         mTitleTextView.setText("Solves: Session " + sharedPref.getString("session", "1"));
@@ -236,7 +236,7 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-    private void setCustomToolbarSettings(View toolbar, TextView timerText) {
+    private void setCustomToolbarSettings(View toolbar, TextView timerText, ImageButton imgbutton) {
         switch (sharedPref.getString("theme", "BLACK")) {
             case "BLACK":
                 toolbar.setBackgroundColor(getResources().getColor(R.color.black));
@@ -262,24 +262,10 @@ public class MainActivity extends AppCompatActivity {
         }
         if (sharedPref.getString("theme", "BLACK").equals("WHITE")) {
             timerText.setTextColor(getResources().getColor(R.color.black));
+            imgbutton.setImageResource(R.drawable.ic_delete_button);
         } else {
             timerText.setTextColor(getResources().getColor(R.color.white));
+            imgbutton.setImageResource(R.drawable.ic_delete_button_white);
         }
-    }
-
-    public int getScreenOrientation()
-    {
-        Display getOrient = getWindowManager().getDefaultDisplay();
-        int orientation;
-        if(getOrient.getWidth()==getOrient.getHeight()){
-            orientation = Configuration.ORIENTATION_SQUARE;
-        } else{
-            if(getOrient.getWidth() < getOrient.getHeight()){
-                orientation = Configuration.ORIENTATION_PORTRAIT;
-            }else {
-                orientation = Configuration.ORIENTATION_LANDSCAPE;
-            }
-        }
-        return orientation;
     }
 }
