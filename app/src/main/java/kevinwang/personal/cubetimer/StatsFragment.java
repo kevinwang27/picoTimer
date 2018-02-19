@@ -30,7 +30,7 @@ public class StatsFragment extends Fragment {
     private List<String> mCurrAoFTimes = new ArrayList<>();
     private List<String> mCurrAoTTimes = new ArrayList<>();
     private List<Long> solveTimes = new ArrayList<>();
-    protected RecyclerView mRecyclerView;
+    RecyclerView mRecyclerView;
     SharedPreferences sharedPref;
 
     public StatsFragment() {
@@ -65,11 +65,14 @@ public class StatsFragment extends Fragment {
             }
         });
         t1.start();
+
+        /*  wait until thread finishes */
         try {
             t1.join();
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
+
         mRecyclerView.setAdapter(new StatsAdapter(mDescriptions, mTimes, mBestAoFTimes, mBestAoTTimes, mCurrAoFTimes, mCurrAoTTimes));
     }
 
@@ -106,7 +109,6 @@ public class StatsFragment extends Fragment {
         if (arr[arr.length - 1].contains("(+2)")) {
             arr[arr.length - 1] = arr[arr.length - 1].replace("(+2)", "");
         } else if (arr[0].contains("DNF")) {
-            //arr = input.replace("DNF(", "").replace(")", "").split(":");
             return -1;
         }
         if (arr.length == 2) {
@@ -155,11 +157,11 @@ public class StatsFragment extends Fragment {
         }
         List<Long> copy = new ArrayList<>(list);
         Collections.reverse(copy);
-        int count = 0;
+        int count = 0, dnf_count = 0;
         long total = 0;
-        int dnf_count = 0;
-        List<Long> nums = new ArrayList<>(); //most recent time comes first
+        List<Long> nums = new ArrayList<>();
         for (long num : copy) {
+            // only use n times
             if (count < n) {
                 if (num >= 0) {
                     total += num;
@@ -215,46 +217,49 @@ public class StatsFragment extends Fragment {
                 posSolveTimes.add(time);
             }
         }
-        mTimes[0] = String.valueOf(solves.size());
+
+        mTimes[0] = String.valueOf(solves.size()); // number of solves
+
         if (posSolveTimes.size() > 0) {
-            mTimes[1] = longToString(Collections.min(posSolveTimes));
-            mTimes[2] = longToString(Collections.max(posSolveTimes));
-            if (posSolveTimes.size() == 1) {
-                mTimes[3] = longToString(posSolveTimes.get(0));
-            } else if (posSolveTimes.size() == 2) {
-                mTimes[3] = longToString((posSolveTimes.get(0) + posSolveTimes.get(1)) / 2);
+            mTimes[1] = longToString(Collections.min(posSolveTimes)); // best solve time
+            mTimes[2] = longToString(Collections.max(posSolveTimes)); // worst solve time
+
+
+            if (posSolveTimes.size() < 3) {
+                mTimes[3] = longToString(calcMean(posSolveTimes)); // average if less than 3 solves
             } else {
-                mTimes[3] = longToString(calcAoN(posSolveTimes.size(), posSolveTimes).get(0));
+                mTimes[3] = longToString(calcAoN(posSolveTimes.size(), posSolveTimes).get(0)); // average if 3 or more solves
             }
+
             mTimes[4] = longToString(calcMean(posSolveTimes));
             if (solveTimes.size() < 5) {
                 mTimes[5] = " - ";
                 mTimes[6] = " - ";
             } else {
                 List<Long> curr = calcAoN(5, solveTimes);
-                mTimes[5] = longToString(curr.remove(0));
-                mCurrAoFTimes = longsToStringsWithParens(curr);
+                mTimes[5] = longToString(curr.remove(0)); // current average of 5
+                mCurrAoFTimes = longsToStringsWithParens(curr); // list of times
 
                 List<Long> best= getBestAoN(5, solveTimes);
-                mTimes[6] = longToString(best.remove(0));
-                mBestAoFTimes = longsToStringsWithParens(best);
+                mTimes[6] = longToString(best.remove(0)); // best average of 5
+                mBestAoFTimes = longsToStringsWithParens(best); // list of times
             }
             if (solveTimes.size() < 12) {
                 mTimes[7] = " - ";
                 mTimes[8] = " - ";
             } else {
                 List<Long> curr = calcAoN(12, solveTimes);
-                mTimes[7] = longToString(curr.remove(0));
-                mCurrAoTTimes = longsToStringsWithParens(curr);
+                mTimes[7] = longToString(curr.remove(0)); // current average of 12
+                mCurrAoTTimes = longsToStringsWithParens(curr); // list of times
 
                 List<Long> best= getBestAoN(12, solveTimes);
-                mTimes[8] = longToString(best.remove(0));
-                mBestAoTTimes = longsToStringsWithParens(best);
+                mTimes[8] = longToString(best.remove(0)); // best average of 12
+                mBestAoTTimes = longsToStringsWithParens(best); // list of times
             }
             if (solveTimes.size() < 100) {
                 mTimes[9] = " - ";
             } else {
-                mTimes[9] = longToString(calcAoN(100, solveTimes).get(0));
+                mTimes[9] = longToString(calcAoN(100, solveTimes).get(0)); // average of 100
             }
         }
     }

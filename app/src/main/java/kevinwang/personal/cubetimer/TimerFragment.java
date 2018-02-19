@@ -73,7 +73,7 @@ public class TimerFragment extends Fragment {
         mScrambleText.setTextSize(sharedPref.getInt("scramble_size", 3) * 2 + 15);
 
         /* set timer and scramble text colors */
-        if (sharedPref.getString("theme", "BLACK").equals("WHITE")) {
+        if (sharedPref.getString("theme", "Black").equals("White")) {
             mTextTimer.setTextColor(getResources().getColor(R.color.black));
             mScrambleText.setTextColor(getResources().getColor(R.color.black));
         } else {
@@ -181,23 +181,23 @@ public class TimerFragment extends Fragment {
         background = getActivity().findViewById(R.id.container);
         sharedPref = PreferenceManager.getDefaultSharedPreferences(getContext());
 
-        switch (sharedPref.getString("theme", "BLACK")) {
-            case "BLACK":
+        switch (sharedPref.getString("theme", "Black")) {
+            case "Black":
                 view.setBackgroundColor(getResources().getColor(R.color.black));
                 break;
-            case "WHITE":
+            case "White":
                 view.setBackgroundColor(getResources().getColor(R.color.white));
                 break;
-            case "BLUE":
+            case "Blue":
                 view.setBackgroundColor(getResources().getColor(R.color.blue));
                 break;
-            case "GREEN":
+            case "Green":
                 view.setBackgroundColor(getResources().getColor(R.color.green));
                 break;
-            case "RED":
+            case "Red":
                 view.setBackgroundColor(getResources().getColor(R.color.red));
                 break;
-            case "PURPLE":
+            case "Purple":
                 view.setBackgroundColor(getResources().getColor(R.color.purple));
                 break;
             case "Unicorn":
@@ -214,28 +214,28 @@ public class TimerFragment extends Fragment {
                 if (motionEvent.getAction() == MotionEvent.ACTION_DOWN) {
                     if (time_running == false) {
                         // Indicate holding down
-                        switch (sharedPref.getString("theme", "BLACK")) {// change to slight color difference
-                            case "BLACK":
+                        switch (sharedPref.getString("theme", "Black")) {// change to slight color difference
+                            case "Black":
                                 view.setBackgroundColor(getResources().getColor(R.color.darkgray));
                                 background.setBackgroundColor(getResources().getColor(R.color.darkgray));
                                 break;
-                            case "WHITE":
+                            case "White":
                                 view.setBackgroundColor(getResources().getColor(R.color.whitediff));
                                 background.setBackgroundColor(getResources().getColor(R.color.whitediff));
                                 break;
-                            case "BLUE":
+                            case "Blue":
                                 view.setBackgroundColor(getResources().getColor(R.color.bluediff));
                                 background.setBackgroundColor(getResources().getColor(R.color.bluediff));
                                 break;
-                            case "GREEN":
+                            case "Green":
                                 view.setBackgroundColor(getResources().getColor(R.color.greendiff));
                                 background.setBackgroundColor(getResources().getColor(R.color.greendiff));
                                 break;
-                            case "RED":
+                            case "Red":
                                 view.setBackgroundColor(getResources().getColor(R.color.reddiff));
                                 background.setBackgroundColor(getResources().getColor(R.color.reddiff));
                                 break;
-                            case "PURPLE":
+                            case "Purple":
                                 view.setBackgroundColor(getResources().getColor(R.color.purplediff));
                                 background.setBackgroundColor(getResources().getColor(R.color.purplediff));
                                 break;
@@ -266,28 +266,28 @@ public class TimerFragment extends Fragment {
                 } else if (motionEvent.getAction() == MotionEvent.ACTION_UP) {
                     if (time_running == false) {
                         // Start the timer
-                        switch (sharedPref.getString("theme", "BLACK")) {
-                            case "BLACK":
+                        switch (sharedPref.getString("theme", "Black")) {
+                            case "Black":
                                 view.setBackgroundColor(getResources().getColor(R.color.black));
                                 background.setBackgroundColor(getResources().getColor(R.color.black));
                                 break;
-                            case "WHITE":
+                            case "White":
                                 view.setBackgroundColor(getResources().getColor(R.color.white));
                                 background.setBackgroundColor(getResources().getColor(R.color.white));
                                 break;
-                            case "BLUE":
+                            case "Blue":
                                 view.setBackgroundColor(getResources().getColor(R.color.blue));
                                 background.setBackgroundColor(getResources().getColor(R.color.blue));
                                 break;
-                            case "GREEN":
+                            case "Green":
                                 view.setBackgroundColor(getResources().getColor(R.color.green));
                                 background.setBackgroundColor(getResources().getColor(R.color.green));
                                 break;
-                            case "RED":
+                            case "Red":
                                 view.setBackgroundColor(getResources().getColor(R.color.red));
                                 background.setBackgroundColor(getResources().getColor(R.color.red));
                                 break;
-                            case "PURPLE":
+                            case "Purple":
                                 view.setBackgroundColor(getResources().getColor(R.color.purple));
                                 background.setBackgroundColor(getResources().getColor(R.color.purple));
                                 break;

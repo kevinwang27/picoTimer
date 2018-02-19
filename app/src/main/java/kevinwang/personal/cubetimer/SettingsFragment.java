@@ -5,17 +5,14 @@ import android.content.DialogInterface;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.PreferenceFragment;
-import android.support.v4.app.Fragment;
 import android.support.v7.app.AlertDialog;
-import android.support.v7.app.AppCompatActivity;
 import android.support.v7.preference.Preference;
 import android.support.v7.preference.PreferenceFragmentCompat;
 import android.support.v7.preference.PreferenceManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
-import android.widget.Toolbar;
+import android.support.v7.widget.Toolbar;
 
 /**
  * A simple {@link PreferenceFragment} subclass.
@@ -40,11 +37,15 @@ public class SettingsFragment extends PreferenceFragmentCompat implements Shared
     @Override
     public void onCreatePreferences(Bundle savedInstanceState, String rootKey) {
         addPreferencesFromResource(R.xml.preferences);
+
         final SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getContext());
+
         Preference session = findPreference("session");
         session.setSummary(sharedPreferences.getString("session", "1"));
+
         Preference theme = findPreference("theme");
-        theme.setSummary(sharedPreferences.getString("theme", "BLACK"));
+        theme.setSummary(sharedPreferences.getString("theme", "Black"));
+
         Preference clearAll = findPreference("clear_all");
         clearAll.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
             @Override
@@ -88,33 +89,34 @@ public class SettingsFragment extends PreferenceFragmentCompat implements Shared
             session.setSummary(sharedPreferences.getString(s, "1"));
         } else if (s.equals("theme")) {
             Preference theme = findPreference(s);
-            theme.setSummary(sharedPreferences.getString(s, "BLACK"));
+            theme.setSummary(sharedPreferences.getString(s, "Black"));
         }
-        android.support.v7.widget.Toolbar toolbar = (android.support.v7.widget.Toolbar) getActivity().findViewById(R.id.toolbar);
-        switch (sharedPreferences.getString("theme", "BLACK")) {
-            case "BLACK":
+        Toolbar toolbar = (Toolbar) getActivity().findViewById(R.id.toolbar);
+        switch (sharedPreferences.getString("theme", "Black")) {
+            case "Black":
                 toolbar.setBackgroundColor(getResources().getColor(R.color.black));
                 break;
-            case "WHITE":
+            case "White":
                 toolbar.setBackgroundColor(getResources().getColor(R.color.white));
                 break;
-            case "BLUE":
+            case "Blue":
                 toolbar.setBackgroundColor(getResources().getColor(R.color.blue));
                 break;
-            case "GREEN":
+            case "Green":
                 toolbar.setBackgroundColor(getResources().getColor(R.color.green));
                 break;
-            case "RED":
+            case "Red":
                 toolbar.setBackgroundColor(getResources().getColor(R.color.red));
                 break;
-            case "PURPLE":
+            case "Purple":
                 toolbar.setBackgroundColor(getResources().getColor(R.color.purple));
                 break;
             case "Unicorn":
                 toolbar.setBackgroundColor(getResources().getColor(R.color.unicorn));
                 break;
         }
-        if (sharedPreferences.getString("theme", "BLACK").equals("WHITE")) {
+        
+        if (sharedPreferences.getString("theme", "Black").equals("White")) {
             toolbar.setTitleTextColor(getResources().getColor(R.color.black));
         } else {
             toolbar.setTitleTextColor(getResources().getColor(R.color.white));

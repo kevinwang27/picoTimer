@@ -206,30 +206,30 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void setToolbarSettings(Toolbar toolbar) {
-        switch (sharedPref.getString("theme", "BLACK")) {
-            case "BLACK":
+        switch (sharedPref.getString("theme", "Black")) {
+            case "Black":
                 toolbar.setBackgroundColor(getResources().getColor(R.color.black));
                 break;
-            case "WHITE":
+            case "White":
                 toolbar.setBackgroundColor(getResources().getColor(R.color.white));
                 break;
-            case "BLUE":
+            case "Blue":
                 toolbar.setBackgroundColor(getResources().getColor(R.color.blue));
                 break;
-            case "GREEN":
+            case "Green":
                 toolbar.setBackgroundColor(getResources().getColor(R.color.green));
                 break;
-            case "RED":
+            case "Red":
                 toolbar.setBackgroundColor(getResources().getColor(R.color.red));
                 break;
-            case "PURPLE":
+            case "Purple":
                 toolbar.setBackgroundColor(getResources().getColor(R.color.purple));
                 break;
             case "Unicorn":
                 toolbar.setBackgroundColor(getResources().getColor(R.color.unicorn));
                 break;
         }
-        if (sharedPref.getString("theme", "BLACK").equals("WHITE")) {
+        if (sharedPref.getString("theme", "Black").equals("White")) {
             toolbar.setTitleTextColor(getResources().getColor(R.color.black));
         } else {
             toolbar.setTitleTextColor(getResources().getColor(R.color.white));
@@ -237,30 +237,30 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void setCustomToolbarSettings(View toolbar, TextView timerText, ImageButton imgbutton) {
-        switch (sharedPref.getString("theme", "BLACK")) {
-            case "BLACK":
+        switch (sharedPref.getString("theme", "Black")) {
+            case "Black":
                 toolbar.setBackgroundColor(getResources().getColor(R.color.black));
                 break;
-            case "WHITE":
+            case "White":
                 toolbar.setBackgroundColor(getResources().getColor(R.color.white));
                 break;
-            case "BLUE":
+            case "Blue":
                 toolbar.setBackgroundColor(getResources().getColor(R.color.blue));
                 break;
-            case "GREEN":
+            case "Green":
                 toolbar.setBackgroundColor(getResources().getColor(R.color.green));
                 break;
-            case "RED":
+            case "Red":
                 toolbar.setBackgroundColor(getResources().getColor(R.color.red));
                 break;
-            case "PURPLE":
+            case "Purple":
                 toolbar.setBackgroundColor(getResources().getColor(R.color.purple));
                 break;
             case "Unicorn":
                 toolbar.setBackgroundColor(getResources().getColor(R.color.unicorn));
                 break;
         }
-        if (sharedPref.getString("theme", "BLACK").equals("WHITE")) {
+        if (sharedPref.getString("theme", "Black").equals("White")) {
             timerText.setTextColor(getResources().getColor(R.color.black));
             imgbutton.setImageResource(R.drawable.ic_delete_button);
         } else {

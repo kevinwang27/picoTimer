@@ -7,13 +7,11 @@ import android.graphics.Typeface;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -23,10 +21,10 @@ import java.util.List;
 public class StatsAdapter extends RecyclerView.Adapter<StatsAdapter.ViewHolder> {
     private String[] mDescriptionSet;
     private String[] mTimeSet;
-    private List<String> mBestOfFives = new ArrayList<>();
-    private List<String> mBestOfTwelves = new ArrayList<>();
-    private List<String> mCurrOfFives = new ArrayList<>();
-    private List<String> mCurrOfTwelves = new ArrayList<>();
+    private List<String> mBestOfFives;
+    private List<String> mBestOfTwelves;
+    private List<String> mCurrOfFives;
+    private List<String> mCurrOfTwelves;
 
     public class ViewHolder extends RecyclerView.ViewHolder {
         CardView cv;
@@ -48,7 +46,6 @@ public class StatsAdapter extends RecyclerView.Adapter<StatsAdapter.ViewHolder> 
         mBestOfTwelves = bestOfTwelves;
         mCurrOfFives = currFives;
         mCurrOfTwelves = currTwelves;
-        Log.d("size", bestOfFives.size()+"");
     }
 
     @Override
@@ -97,12 +94,15 @@ public class StatsAdapter extends RecyclerView.Adapter<StatsAdapter.ViewHolder> 
 
     private void createTimesDialog(List<String> times, Context context) {
         AlertDialog.Builder ad = new AlertDialog.Builder(context);
+
+        /* make and customize title textview */
         TextView titleView = new TextView((context));
         titleView.setText(concatAllStrings(times));
         titleView.setPadding(40,20,40,20);
         titleView.setTypeface(null, Typeface.BOLD);
         titleView.setTextColor(Color.BLACK);
         titleView.setTextSize(20);
+
         ad.setCustomTitle(titleView);
         ad.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
             @Override
