@@ -46,6 +46,8 @@ public class MainActivity extends AppCompatActivity {
         final TextView mTitleTextView = (TextView) view.findViewById(R.id.title_text);
         final ImageButton imageButton = (ImageButton) view.findViewById(R.id.imageButton);
 
+        timerFrag = new TimerFragment();
+
         BottomNavigationViewHelper.disableShiftMode(mBottomNavigationView);
         mBottomNavigationView.setOnNavigationItemSelectedListener(
                 new BottomNavigationView.OnNavigationItemSelectedListener() {
@@ -107,7 +109,6 @@ public class MainActivity extends AppCompatActivity {
                                 if (timerFrag.isVisible()) {
                                     break;
                                 }
-                                timerFrag = new TimerFragment();
                                 getSupportFragmentManager().beginTransaction().replace(R.id.entire_view, timerFrag).show(timerFrag).commit();
 
                                 getSupportActionBar().hide();
